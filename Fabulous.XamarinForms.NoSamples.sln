@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5070FCC8-90FB-4148-B009-908EA3D29427}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous.XamarinForms", "src\Fabulous.XamarinForms\Fabulous.XamarinForms.fsproj", "{6E1A4B0A-5087-4A41-91DB-146B1652FBCA}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous.XamarinForms.Tests", "src\Fabulous.XamarinForms.Tests\Fabulous.XamarinForms.Tests.fsproj", "{9B5C89DF-E426-42E3-9123-EF25AFF19AA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E1A4B0A-5087-4A41-91DB-146B1652FBCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1A4B0A-5087-4A41-91DB-146B1652FBCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1A4B0A-5087-4A41-91DB-146B1652FBCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1A4B0A-5087-4A41-91DB-146B1652FBCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5C89DF-E426-42E3-9123-EF25AFF19AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5C89DF-E426-42E3-9123-EF25AFF19AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5C89DF-E426-42E3-9123-EF25AFF19AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5C89DF-E426-42E3-9123-EF25AFF19AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E1A4B0A-5087-4A41-91DB-146B1652FBCA} = {5070FCC8-90FB-4148-B009-908EA3D29427}
+		{9B5C89DF-E426-42E3-9123-EF25AFF19AA4} = {5070FCC8-90FB-4148-B009-908EA3D29427}
+	EndGlobalSection
+EndGlobal
