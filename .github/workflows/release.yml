@@ -6,17 +6,25 @@ on:
 
 permissions: write-all
 
+env:
+  SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
+  TEMPLATE_PROJ: templates/Fabulous.XamarinForms.Templates.proj
+
 jobs:
   release:
     runs-on: macos-latest
     environment: nuget
-    env:
-      SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
-      TEMPLATE_PROJ: templates/Fabulous.XamarinForms.Templates.proj
     steps:
     - uses: actions/checkout@v3
     - name: Extract version from tag
       uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+    - name: Get Changelog Entry
+      id: changelog_reader
+      uses: mindsers/changelog-reader-action@v2
+      with:
+        validation_level: warn
+        version: '${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}'
+        path: ./CHANGELOG.md
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -24,14 +32,13 @@ jobs:
     - name: Restore
       run: dotnet restore ${SLN_FILE}
     - name: Build
-      run: dotnet build ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --no-restore --configuration Release
+      run: dotnet build ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --no-restore
     - name: Test
-      run: dotnet test ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --no-build --configuration Release
+      run: dotnet test ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --no-build
     - name: Pack
       run: |
-        find templates -type f -name template.json | xargs sed -i bak "s/FABULOUS_PKG_VERSION/${MAJOR}.${MINOR}.${PATCH}/g"
-        dotnet pack ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --output nupkgs
+        find templates -type f -name template.json | xargs sed -i bak "s/FABULOUS_PKG_VERSION/${VERSION}/g"
+        dotnet pack ${SLN_FILE} -p:Version="${MAJOR}.${MINOR}.${PATCH}" -p:PackageReleaseNotes="${{ steps.changelog_reader.outputs.changes }}" --configuration Release --output nupkgs
         dotnet pack ${TEMPLATE_PROJ} -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --output nupkgs
-    - name: Push
-      run: |
-        dotnet nuget push "nupkgs/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate
+    # - name: Push
+    #   run: dotnet nuget push "nupkgs/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate

@@ -3,8 +3,6 @@
         <TargetFramework>net6.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <OutputType>Library</OutputType>
-        <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Generators.fs" />

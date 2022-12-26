@@ -1,20 +1,19 @@
 name: Build
 on:
-   push:
-     branches: [ 'v2.1' ]
-     paths-ignore: [ 'docs/**' ]
+  push:
+    branches: [ 'main' ]
+    paths-ignore: [ 'docs/**' ]
 
 permissions: write-all
 
 env:
-  VERSION: 2.1.0
+  VERSION: 2.1.1
+  SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
+  TEMPLATE_PROJ: templates/Fabulous.XamarinForms.Templates.proj
 
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
-      TEMPLATE_PROJ: templates/Fabulous.XamarinForms.Templates.proj
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -24,14 +23,13 @@ jobs:
     - name: Restore
       run: dotnet restore ${SLN_FILE}
     - name: Build
-      run: dotnet build ${SLN_FILE} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --no-restore --configuration Release
+      run: dotnet build ${SLN_FILE} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --no-restore
     - name: Test
-      run: dotnet test ${SLN_FILE} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --no-build --configuration Release
+      run: dotnet test ${SLN_FILE} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --no-build
     - name: Pack
       run: |
         find templates -type f -name template.json | xargs sed -i bak "s/FABULOUS_PKG_VERSION/${VERSION}-nightly-${GITHUB_RUN_ID}/g"
         dotnet pack ${SLN_FILE} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --output nupkgs
-        dotnet pack ${TEMPLATE_PROJ} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} -p:IsNightlyBuild=true --configuration Release --output nupkgs
-    - name: Push
-      run: |
-        dotnet nuget push "nupkgs/*.nupkg" -s https://nuget.pkg.github.com/fabulous-dev/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        dotnet pack ${TEMPLATE_PROJ} -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release -p:IsNightlyBuild=true --output nupkgs
+    # - name: Push
+    #   run: dotnet nuget push "nupkgs/*.nupkg" -s https://nuget.pkg.github.com/fabulous-dev/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate

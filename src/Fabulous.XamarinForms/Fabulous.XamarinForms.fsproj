@@ -5,11 +5,8 @@
     <PackageReadmeFile>PackageREADME.md</PackageReadmeFile>
     <PackageIcon>nuget-icon.png</PackageIcon>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <VersionPrefix>2.1.0</VersionPrefix>
     <RepositoryUrl>https://github.com/fabulous-dev/Fabulous.XamarinForms</RepositoryUrl>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <None Include="PackageREADME.md" Pack="true" PackagePath="\" />

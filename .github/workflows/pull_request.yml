@@ -1,6 +1,9 @@
 name: Pull Request
 on: pull_request
 
+env:
+  SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
+
 jobs:
   pull_request:
     runs-on: macos-latest
@@ -17,6 +20,6 @@ jobs:
     - name: Restore
       run: dotnet restore ${SLN_FILE}
     - name: Build
-      run: dotnet build ${SLN_FILE} --no-restore --configuration Release
+      run: dotnet build ${SLN_FILE} --configuration Release --no-restore
     - name: Test
-      run: dotnet test ${SLN_FILE} --no-build --configuration Release
+      run: dotnet test ${SLN_FILE} --configuration Release --no-build
