@@ -12,14 +12,10 @@ open System.IO
 
 module Components =
     let centralLabel text =
-        Label(text)
-            .centerHorizontal()
-            .centerVertical(expand = true)
+        Label(text).centerHorizontal().centerVertical(expand = true)
 
     let formLabel text =
-        View
-            .Label(text)
-            .margin(Thickness(0., 20., 0., 5.))
+        View.Label(text).margin(Thickness(0., 20., 0., 5.))
 
     let formEntry placeholder text keyboard isValid onTextChanged =
         BorderedEntry(text, onTextChanged)
@@ -43,8 +39,7 @@ module Components =
             .alignEndVertical(expand = true)
 
     let toolbarButton text onClicked =
-        ToolbarItem(text, onClicked)
-            .order(ToolbarItemOrder.Primary)
+        ToolbarItem(text, onClicked).order(ToolbarItemOrder.Primary)
 
     let groupView name =
         ViewCell(
@@ -54,7 +49,7 @@ module Components =
                     .verticalOptions(LayoutOptions.FillAndExpand)
                     .verticalTextAlignment(TextAlignment.Center)
                     .margin(Thickness(20., 5.))
-             })
+            })
                 .background(accentColor)
         )
 
@@ -66,16 +61,13 @@ module Components =
                     .size(height = 50., width = 50.)
 
                 (VStack(spacing = 5.) {
-                    Label(name)
-                        .font(18.)
-                        .fillVertical(expand = true)
-                        .centerTextVertical()
+                    Label(name).font(18.).fillVertical(expand = true).centerTextVertical()
 
                     Label(address)
                         .font(12.)
                         .textColor(Color.Gray.ToFabColor())
                         .lineBreakMode(LineBreakMode.TailTruncation)
-                 })
+                })
                     .fillHorizontal(expand = true)
                     .margin(0., 5., 0., 5.)
 
@@ -84,7 +76,7 @@ module Components =
                     .centerVertical()
                     .margin(0., 0., 15., 0.)
                     .size(height = 25., width = 25.)
-             })
+            })
                 .padding(5.)
         )
 
@@ -95,29 +87,24 @@ module Components =
             .fillHorizontal(expand = true)
 
     let detailFieldTitle text =
-        Label(text)
-            .font(attributes = FontAttributes.Bold)
-            .margin(0., 10., 0., 0.)
+        Label(text).font(attributes = FontAttributes.Bold).margin(0., 10., 0., 0.)
 
     let optionalLabel text =
         match text with
-        | "" ->
-            Label(Strings.Common_NotSpecified)
-                .font(attributes = FontAttributes.Italic)
+        | "" -> Label(Strings.Common_NotSpecified).font(attributes = FontAttributes.Italic)
         | _ -> Label(text)
 
     let favoriteField isFavorite markAsFavorite =
         (HStack() {
-            Label(Strings.EditPage_MarkAsFavoriteField_Label)
-                .centerVertical()
+            Label(Strings.EditPage_MarkAsFavoriteField_Label).centerVertical()
 
             Switch(isFavorite, markAsFavorite)
                 .alignEndHorizontal(expand = true)
                 .centerVertical()
-         })
+        })
             .margin(0., 20., 0., 0.)
 
-    let profilePictureButton (picture: byte [] option) updatePicture =
+    let profilePictureButton (picture: byte[] option) updatePicture =
         match picture with
         | None ->
             ContentView(ImageButton(Aspect.AspectFit, "addphoto.png", updatePicture))
@@ -125,10 +112,8 @@ module Components =
                 .gridRowSpan(2)
 
         | Some picture ->
-            ContentView(
-                Image(Aspect.AspectFill, new MemoryStream(picture))
-            )
-                .gridRowSpan(
-                2
-            )
-                .gestureRecognizers() { TapGestureRecognizer(updatePicture) }
+            ContentView(Image(Aspect.AspectFill, new MemoryStream(picture)))
+                .gridRowSpan(2)
+                .gestureRecognizers() {
+                TapGestureRecognizer(updatePicture)
+            }

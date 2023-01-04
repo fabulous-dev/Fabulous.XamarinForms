@@ -12,11 +12,9 @@ type IButton =
 module Button =
     let WidgetKey = Widgets.register<Button>()
 
-    let BorderColor =
-        Attributes.defineBindableAppThemeColor Button.BorderColorProperty
+    let BorderColor = Attributes.defineBindableAppThemeColor Button.BorderColorProperty
 
-    let BorderWidth =
-        Attributes.defineBindableFloat Button.BorderWidthProperty
+    let BorderWidth = Attributes.defineBindableFloat Button.BorderWidthProperty
 
     let CharacterSpacing =
         Attributes.defineBindableFloat Button.CharacterSpacingProperty
@@ -24,8 +22,7 @@ module Button =
     let ContentLayout =
         Attributes.defineBindableWithEquality<Button.ButtonContentLayout> Button.ContentLayoutProperty
 
-    let CornerRadius =
-        Attributes.defineBindableInt Button.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableInt Button.CornerRadiusProperty
 
     let FontAttributes =
         Attributes.defineBindableEnum<FontAttributes> Button.FontAttributesProperty
@@ -33,8 +30,7 @@ module Button =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> Button.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat Button.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat Button.FontSizeProperty
 
     let ImageSource =
         Attributes.defineBindableAppTheme<ImageSource> Button.ImageSourceProperty
@@ -42,11 +38,9 @@ module Button =
     let Padding =
         Attributes.defineBindableWithEquality<Thickness> Button.PaddingProperty
 
-    let TextColor =
-        Attributes.defineBindableAppThemeColor Button.TextColorProperty
+    let TextColor = Attributes.defineBindableAppThemeColor Button.TextColorProperty
 
-    let Text =
-        Attributes.defineBindableWithEquality<string> Button.TextProperty
+    let Text = Attributes.defineBindableWithEquality<string> Button.TextProperty
 
     let TextTransform =
         Attributes.defineBindableEnum<TextTransform> Button.TextTransformProperty
@@ -63,12 +57,9 @@ module Button =
 [<AutoOpen>]
 module ButtonBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline Button<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IButton>(
-                Button.WidgetKey,
-                Button.Text.WithValue(text),
-                Button.Clicked.WithValue(onClicked)
-            )
+            WidgetBuilder<'msg, IButton>(Button.WidgetKey, Button.Text.WithValue(text), Button.Clicked.WithValue(onClicked))
 
 [<Extension>]
 type ButtonModifiers =
@@ -101,14 +92,7 @@ type ButtonModifiers =
         ButtonModifiers.padding(this, Thickness(value))
 
     [<Extension>]
-    static member inline padding
-        (
-            this: WidgetBuilder<'msg, #IButton>,
-            left: float,
-            top: float,
-            right: float,
-            bottom: float
-        ) =
+    static member inline padding(this: WidgetBuilder<'msg, #IButton>, left: float, top: float, right: float, bottom: float) =
         ButtonModifiers.padding(this, Thickness(left, top, right, bottom))
 
     [<Extension>]
@@ -116,23 +100,11 @@ type ButtonModifiers =
         this.AddScalar(Button.CharacterSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline contentLayout
-        (
-            this: WidgetBuilder<'msg, #IButton>,
-            position: Xamarin.Forms.Button.ButtonContentLayout.ImagePosition,
-            spacing: float
-        ) =
+    static member inline contentLayout(this: WidgetBuilder<'msg, #IButton>, position: Xamarin.Forms.Button.ButtonContentLayout.ImagePosition, spacing: float) =
         this.AddScalar(Button.ContentLayout.WithValue(Button.ButtonContentLayout(position, spacing)))
 
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #IButton>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #IButton>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 

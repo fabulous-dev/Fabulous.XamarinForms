@@ -12,27 +12,21 @@ type IImage =
 module Image =
     let WidgetKey = Widgets.register<Image>()
 
-    let Aspect =
-        Attributes.defineBindableEnum<Aspect> Image.AspectProperty
+    let Aspect = Attributes.defineBindableEnum<Aspect> Image.AspectProperty
 
     let IsAnimationPlaying =
         Attributes.defineBindableBool Image.IsAnimationPlayingProperty
 
-    let IsOpaque =
-        Attributes.defineBindableBool Image.IsOpaqueProperty
+    let IsOpaque = Attributes.defineBindableBool Image.IsOpaqueProperty
 
-    let Source =
-        Attributes.defineBindableAppTheme<ImageSource> Image.SourceProperty
+    let Source = Attributes.defineBindableAppTheme<ImageSource> Image.SourceProperty
 
 [<AutoOpen>]
 module ImageBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline Image<'msg>(aspect: Aspect, light: ImageSource, ?dark: ImageSource) =
-            WidgetBuilder<'msg, IImage>(
-                Image.WidgetKey,
-                Image.Aspect.WithValue(aspect),
-                Image.Source.WithValue(AppTheme.create light dark)
-            )
+            WidgetBuilder<'msg, IImage>(Image.WidgetKey, Image.Aspect.WithValue(aspect), Image.Source.WithValue(AppTheme.create light dark))
 
         static member inline Image<'msg>(aspect: Aspect, light: string, ?dark: string) =
             let light = ImageSource.FromFile(light)

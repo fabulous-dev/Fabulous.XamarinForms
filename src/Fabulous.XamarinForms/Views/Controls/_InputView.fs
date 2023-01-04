@@ -12,14 +12,12 @@ module InputView =
     let CharacterSpacing =
         Attributes.defineBindableFloat InputView.CharacterSpacingProperty
 
-    let IsReadOnly =
-        Attributes.defineBindableBool InputView.IsReadOnlyProperty
+    let IsReadOnly = Attributes.defineBindableBool InputView.IsReadOnlyProperty
 
     let IsSpellCheckEnabled =
         Attributes.defineBindableBool InputView.IsSpellCheckEnabledProperty
 
-    let MaxLength =
-        Attributes.defineBindableInt InputView.MaxLengthProperty
+    let MaxLength = Attributes.defineBindableInt InputView.MaxLengthProperty
 
     let Placeholder =
         Attributes.defineBindableWithEquality<string> InputView.PlaceholderProperty
@@ -27,8 +25,7 @@ module InputView =
     let PlaceholderColor =
         Attributes.defineBindableAppThemeColor InputView.PlaceholderColorProperty
 
-    let TextColor =
-        Attributes.defineBindableAppThemeColor InputView.TextColorProperty
+    let TextColor = Attributes.defineBindableAppThemeColor InputView.TextColorProperty
 
     let Keyboard =
         Attributes.defineBindableWithEquality<Keyboard> InputView.KeyboardProperty
@@ -37,10 +34,8 @@ module InputView =
         Attributes.defineBindableEnum<TextTransform> InputView.TextTransformProperty
 
     let TextWithEvent =
-        Attributes.defineBindableWithEvent<string, TextChangedEventArgs>
-            "InputView_TextChanged"
-            InputView.TextProperty
-            (fun target -> (target :?> InputView).TextChanged)
+        Attributes.defineBindableWithEvent<string, TextChangedEventArgs> "InputView_TextChanged" InputView.TextProperty (fun target ->
+            (target :?> InputView).TextChanged)
 
 [<Extension>]
 type InputViewModifiers =

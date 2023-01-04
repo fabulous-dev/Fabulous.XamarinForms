@@ -54,10 +54,11 @@ module MainPage =
               TabMapModel = modelMap }
 
         let batchCmd =
-            Cmd.batch [ Cmd.ofAsyncMsg(loadAsync dbPath)
-                        Cmd.map TabAllContactsMsg msgAllContacts
-                        Cmd.map TabFavContactsMsg msgFavContacts
-                        Cmd.map TabMapMsg msgMap ]
+            Cmd.batch
+                [ Cmd.ofAsyncMsg(loadAsync dbPath)
+                  Cmd.map TabAllContactsMsg msgAllContacts
+                  Cmd.map TabFavContactsMsg msgFavContacts
+                  Cmd.map TabMapMsg msgMap ]
 
         m, batchCmd
 
@@ -70,17 +71,12 @@ module MainPage =
                 | ContactsListPage.ExternalMsg.NoOp -> Cmd.none, ExternalMsg.NoOp
                 | ContactsListPage.ExternalMsg.NavigateToAbout -> Cmd.none, ExternalMsg.NavigateToAbout
                 | ContactsListPage.ExternalMsg.NavigateToNewContact -> Cmd.none, ExternalMsg.NavigateToNewContact
-                | ContactsListPage.ExternalMsg.NavigateToDetail contact ->
-                    Cmd.none, (ExternalMsg.NavigateToDetail contact)
+                | ContactsListPage.ExternalMsg.NavigateToDetail contact -> Cmd.none, (ExternalMsg.NavigateToDetail contact)
 
-            m,
-            Cmd.batch [ Cmd.map mapMsgFunc cmd
-                        cmd2 ],
-            externalMsg2
+            m, Cmd.batch [ Cmd.map mapMsgFunc cmd; cmd2 ], externalMsg2
 
         let updateContacts model contacts =
-            let allMsg =
-                ContactsListPage.Msg.ContactsLoaded contacts
+            let allMsg = ContactsListPage.Msg.ContactsLoaded contacts
 
             let favMsg =
                 ContactsListPage.Msg.ContactsLoaded(contacts |> List.filter(fun c -> c.IsFavorite))
@@ -88,9 +84,10 @@ module MainPage =
             let mapMsg = MapPage.Msg.LoadPins contacts
 
             let batchCmd =
-                Cmd.batch [ Cmd.ofMsg(TabAllContactsMsg allMsg)
-                            Cmd.ofMsg(TabFavContactsMsg favMsg)
-                            Cmd.ofMsg(TabMapMsg mapMsg) ]
+                Cmd.batch
+                    [ Cmd.ofMsg(TabAllContactsMsg allMsg)
+                      Cmd.ofMsg(TabFavContactsMsg favMsg)
+                      Cmd.ofMsg(TabMapMsg mapMsg) ]
 
             let m = { model with Contacts = Some contacts }
             m, batchCmd, ExternalMsg.NoOp
@@ -126,9 +123,7 @@ module MainPage =
             updateContacts model newContacts
 
         | ContactDeleted contact ->
-            let newContacts =
-                model.Contacts.Value
-                |> List.filter(fun c -> c <> contact)
+            let newContacts = model.Contacts.Value |> List.filter(fun c -> c <> contact)
 
             updateContacts model newContacts
 
@@ -140,10 +135,7 @@ module MainPage =
         ContentPage(title, VStack() { centralLabel Strings.MainPage_Loading })
 
     let emptyView title =
-        ContentPage(
-            title,
-            VStack() { centralLabel Strings.MainPage_NoContact }
-        )
+        ContentPage(title, VStack() { centralLabel Strings.MainPage_NoContact })
             .toolbarItems() {
             ToolbarItem(Strings.Common_About, NoContactAboutTapped)
             ToolbarItem("+", NoContactAddNewContactTapped)
@@ -158,15 +150,13 @@ module MainPage =
             (ContactsListPage.view Strings.MainPage_TabFavoritesTitle model.TabFavContactsModel)
                 .icon("favoritetab.png")
 
-        let tabMap =
-            (MapPage.view model.TabMapModel)
-                .icon("maptab.png")
+        let tabMap = (MapPage.view model.TabMapModel).icon("maptab.png")
 
         (TabbedPage(title) {
             View.map TabAllContactsMsg tabAllContacts
             View.map TabAllContactsMsg tabFavContacts
             View.map TabMapMsg tabMap
-         })
+        })
             .toolbarPlacement(ToolbarPlacement.Bottom)
 
     let view model =

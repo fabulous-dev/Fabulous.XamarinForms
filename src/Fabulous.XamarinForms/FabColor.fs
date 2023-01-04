@@ -11,6 +11,7 @@ open Xamarin.Forms
 [<Struct>]
 type FabColor =
     { RGBA: uint32 }
+
     member inline x.R: uint8 = (x.RGBA &&& 0xFF000000u) >>> 24 |> uint8
 
     member inline x.G: uint8 = (x.RGBA &&& 0x00FF0000u) >>> 16 |> uint8
@@ -43,8 +44,4 @@ module FabColor =
 
     /// Creates a FabColor from 4 byte size components. Expects RGBA ordering.
     let inline fromRGBA (r: uint8) (g: uint8) (b: uint8) (a: uint8) : FabColor =
-        { RGBA =
-              ((uint32 r <<< 24)
-               ||| (uint32 g <<< 16)
-               ||| (uint32 b <<< 8)
-               ||| uint32 a) }
+        { RGBA = ((uint32 r <<< 24) ||| (uint32 g <<< 16) ||| (uint32 b <<< 8) ||| uint32 a) }

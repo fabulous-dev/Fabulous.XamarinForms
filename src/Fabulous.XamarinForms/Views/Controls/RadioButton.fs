@@ -17,20 +17,17 @@ module RadioButton =
     let GroupName =
         Attributes.defineBindableWithEquality<string> RadioButton.GroupNameProperty
 
-    let BorderWidth =
-        Attributes.defineBindableFloat RadioButton.BorderWidthProperty
+    let BorderWidth = Attributes.defineBindableFloat RadioButton.BorderWidthProperty
 
     let CharacterSpacing =
         Attributes.defineBindableFloat RadioButton.CharacterSpacingProperty
 
-    let CornerRadius =
-        Attributes.defineBindableFloat RadioButton.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableFloat RadioButton.CornerRadiusProperty
 
     let ContentString =
         Attributes.defineBindableWithEquality<string> RadioButton.ContentProperty
 
-    let ContentWidget =
-        Attributes.defineBindableWidget RadioButton.ContentProperty
+    let ContentWidget = Attributes.defineBindableWidget RadioButton.ContentProperty
 
     let FontAttributes =
         Attributes.defineBindableEnum<FontAttributes> RadioButton.FontAttributesProperty
@@ -38,11 +35,9 @@ module RadioButton =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> RadioButton.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat RadioButton.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat RadioButton.FontSizeProperty
 
-    let TextColor =
-        Attributes.defineBindableAppThemeColor RadioButton.TextColorProperty
+    let TextColor = Attributes.defineBindableAppThemeColor RadioButton.TextColorProperty
 
     let TextTransform =
         Attributes.defineBindableEnum<TextTransform> RadioButton.TextTransformProperty
@@ -51,38 +46,25 @@ module RadioButton =
         Attributes.defineBindableWithEquality<string> RadioButtonGroup.GroupNameProperty
 
     let IsCheckedWithEvent =
-        Attributes.defineBindableWithEvent
-            "RadioButton_CheckedChanged"
-            RadioButton.IsCheckedProperty
-            (fun target -> (target :?> RadioButton).CheckedChanged)
+        Attributes.defineBindableWithEvent "RadioButton_CheckedChanged" RadioButton.IsCheckedProperty (fun target -> (target :?> RadioButton).CheckedChanged)
 
 [<AutoOpen>]
 module RadioButtonBuilders =
 
     type Fabulous.XamarinForms.View with
+
         static member inline RadioButton<'msg>(content: string, isChecked: bool, onChecked: bool -> 'msg) =
             WidgetBuilder<'msg, IRadioButton>(
                 RadioButton.WidgetKey,
-                RadioButton.IsCheckedWithEvent.WithValue(
-                    ValueEventData.create isChecked (fun args -> onChecked args.Value |> box)
-                ),
+                RadioButton.IsCheckedWithEvent.WithValue(ValueEventData.create isChecked (fun args -> onChecked args.Value |> box)),
                 RadioButton.ContentString.WithValue(content)
             )
 
-        static member inline RadioButton<'msg, 'marker when 'marker :> IView>
-            (
-                content: WidgetBuilder<'msg, 'marker>,
-                isChecked: bool,
-                onChecked: bool -> 'msg
-            ) =
+        static member inline RadioButton<'msg, 'marker when 'marker :> IView>(content: WidgetBuilder<'msg, 'marker>, isChecked: bool, onChecked: bool -> 'msg) =
             WidgetBuilder<'msg, IRadioButton>(
                 RadioButton.WidgetKey,
                 AttributesBundle(
-                    StackList.one(
-                        RadioButton.IsCheckedWithEvent.WithValue(
-                            ValueEventData.create isChecked (fun args -> onChecked args.Value |> box)
-                        )
-                    ),
+                    StackList.one(RadioButton.IsCheckedWithEvent.WithValue(ValueEventData.create isChecked (fun args -> onChecked args.Value |> box))),
                     ValueSome [| RadioButton.ContentWidget.WithValue(content.Compile()) |],
                     ValueNone
                 )
@@ -121,14 +103,7 @@ type RadioButtonModifiers =
         this.AddScalar(RadioButton.CornerRadius.WithValue(value))
 
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #IRadioButton>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #IRadioButton>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 

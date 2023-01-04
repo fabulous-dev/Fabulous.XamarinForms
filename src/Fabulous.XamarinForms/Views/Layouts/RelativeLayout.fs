@@ -29,6 +29,7 @@ module RelativeLayout =
 [<AutoOpen>]
 module RelativeLayoutBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline RelativeLayout<'msg>() =
             CollectionBuilder<'msg, IRelativeLayout, IView>(RelativeLayout.WidgetKey, LayoutOfView.Children)
 

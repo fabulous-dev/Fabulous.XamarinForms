@@ -9,10 +9,11 @@ module SmallScalarGenerators =
     let layoutOptionsGenerator =
         gen {
             let! layoutAlignment =
-                Gen.elements [ LayoutAlignment.Start
-                               LayoutAlignment.Center
-                               LayoutAlignment.End
-                               LayoutAlignment.Fill ]
+                Gen.elements
+                    [ LayoutAlignment.Start
+                      LayoutAlignment.Center
+                      LayoutAlignment.End
+                      LayoutAlignment.Fill ]
 
             let! expands = Arb.generate<bool>
             return LayoutOptions(layoutAlignment, expands)
@@ -20,9 +21,7 @@ module SmallScalarGenerators =
 
     let fabcolorGenerator =
         gen {
-            let fabcolorGen =
-                Arb.generate<uint8>
-                |> Gen.where(fun x -> x >= 0uy && x <= 255uy)
+            let fabcolorGen = Arb.generate<uint8> |> Gen.where(fun x -> x >= 0uy && x <= 255uy)
 
             let! red = fabcolorGen
             let! green = fabcolorGen
@@ -33,9 +32,7 @@ module SmallScalarGenerators =
 
     let colorGenerator =
         gen {
-            let colorGen =
-                Arb.generate<float>
-                |> Gen.where(fun x -> x >= 0.0 && x <= 1.0)
+            let colorGen = Arb.generate<float> |> Gen.where(fun x -> x >= 0.0 && x <= 1.0)
 
             let! red = colorGen
             let! green = colorGen
@@ -47,8 +44,7 @@ module SmallScalarGenerators =
 type Generators =
     static member LayoutOptions() =
         { new Arbitrary<LayoutOptions>() with
-            member this.Generator =
-                SmallScalarGenerators.layoutOptionsGenerator }
+            member this.Generator = SmallScalarGenerators.layoutOptionsGenerator }
 
     static member Color() =
         { new Arbitrary<Color>() with

@@ -34,36 +34,29 @@ module Styles =
 
     let registerGlobalResources (app: Application) =
         app
-        |> addStyles [ createStyleFor<Label> [ Label.TextColorProperty, box AccentTextColor ]
-                       createStyleFor<Button> [ Button.TextColorProperty, box AccentTextColor ] ]
+        |> addStyles
+            [ createStyleFor<Label> [ Label.TextColorProperty, box AccentTextColor ]
+              createStyleFor<Button> [ Button.TextColorProperty, box AccentTextColor ] ]
 
     let getStartGradientColor temp =
-        if temp > 288<kelvin> then
-            WarmStartColor
-        else if temp < 199<kelvin> then
-            NightStartColor
-        else
-            ColdStartColor
+        if temp > 288<kelvin> then WarmStartColor
+        else if temp < 199<kelvin> then NightStartColor
+        else ColdStartColor
 
     let getEndGradientColor temp =
-        if temp > 288<kelvin> then
-            WarmEndColor
-        else if temp < 199<kelvin> then
-            NightEndColor
-        else
-            ColdEndColor
+        if temp > 288<kelvin> then WarmEndColor
+        else if temp < 199<kelvin> then NightEndColor
+        else ColdEndColor
 
     let gradientStops temp =
-        let coll =
-            Xamarin.Forms.PancakeView.GradientStopCollection()
+        let coll = Xamarin.Forms.PancakeView.GradientStopCollection()
 
         coll.Add(PancakeView.GradientStop(Color = (getStartGradientColor temp).ToXFColor(), Offset = float32 0.))
         coll.Add(PancakeView.GradientStop(Color = (getEndGradientColor temp).ToXFColor(), Offset = float32 1.))
         coll
 
     let HourlyForecastGradientStops =
-        let coll =
-            Xamarin.Forms.PancakeView.GradientStopCollection()
+        let coll = Xamarin.Forms.PancakeView.GradientStopCollection()
 
         coll.Add(PancakeView.GradientStop(Color = HourlyForecastStartColor.ToXFColor(), Offset = float32 0.))
         coll.Add(PancakeView.GradientStop(Color = HourlyForecastEndColor.ToXFColor(), Offset = float32 1.))

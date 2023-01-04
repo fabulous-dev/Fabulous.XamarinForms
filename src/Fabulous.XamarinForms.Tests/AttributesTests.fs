@@ -12,8 +12,7 @@ type ``Small scalar encode tests``() =
     member _.``Encoding then decoding a LayoutOptions should return an identical LayoutOptions``(value: LayoutOptions) =
         let encoded = SmallScalars.LayoutOptions.encode value
 
-        let decoded =
-            SmallScalars.LayoutOptions.decode encoded
+        let decoded = SmallScalars.LayoutOptions.decode encoded
 
         Assert.AreEqual(value.Alignment, decoded.Alignment)
         Assert.AreEqual(value.Expands, decoded.Expands)
@@ -39,11 +38,7 @@ type ``Small scalar encode tests``() =
             let expectedU8 = uint8(expected * 255.0)
             let actualU8 = uint8(actual * 255.0)
 
-            let lowerBound =
-                if expectedU8 = 0uy then
-                    0uy
-                else
-                    expectedU8 - 1uy
+            let lowerBound = if expectedU8 = 0uy then 0uy else expectedU8 - 1uy
 
             Assert.GreaterOrEqual(actualU8, lowerBound)
             Assert.LessOrEqual(actualU8, expectedU8)

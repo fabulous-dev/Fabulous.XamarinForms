@@ -57,15 +57,9 @@ module EditPage =
     let tryDeleteAsync dbPath (contact: Contact) =
         async {
             let! shouldDelete =
-                let title =
-                    Strings.EditPage_DeleteContact contact.FirstName contact.LastName
+                let title = Strings.EditPage_DeleteContact contact.FirstName contact.LastName
 
-                displayAlertWithConfirm(
-                    title,
-                    Strings.EditPage_DeleteContactConfirmation,
-                    Strings.Common_Yes,
-                    Strings.Common_No
-                )
+                displayAlertWithConfirm(title, Strings.EditPage_DeleteContactConfirmation, Strings.Common_Yes, Strings.Common_No)
 
             if shouldDelete then
                 do! deleteContact dbPath contact
@@ -95,8 +89,7 @@ module EditPage =
     let tryUpdatePictureAsync (previousValue: _ option) =
         async {
             let canTakePicture =
-                CrossMedia.Current.IsCameraAvailable
-                && CrossMedia.Current.IsTakePhotoSupported
+                CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported
 
             let canPickPicture = CrossMedia.Current.IsPickPhotoSupported
 
@@ -110,10 +103,11 @@ module EditPage =
                          Some Strings.EditPage_PictureContextMenu_Remove
                      else
                          None),
-                    Some [| if canTakePicture then
-                                yield Strings.EditPage_PictureContextMenu_TakePicture
-                            if canPickPicture then
-                                yield Strings.EditPage_PictureContextMenu_ChooseFromGallery |]
+                    Some
+                        [| if canTakePicture then
+                               yield Strings.EditPage_PictureContextMenu_TakePicture
+                           if canPickPicture then
+                               yield Strings.EditPage_PictureContextMenu_ChooseFromGallery |]
                 )
 
             let setPicture value = Some(SetPicture value)
@@ -132,14 +126,7 @@ module EditPage =
         |> Cmd.ofAsyncMsgOption
 
     let sayContactNotValidAsync () =
-        async {
-            do!
-                displayAlert(
-                    Strings.EditPage_InvalidContactTitle,
-                    Strings.EditPage_InvalidContactDescription,
-                    Strings.Common_OK
-                )
-        }
+        async { do! displayAlert(Strings.EditPage_InvalidContactTitle, Strings.EditPage_InvalidContactDescription, Strings.Common_OK) }
 
     let createOrUpdateAsync dbPath contact =
         async {
@@ -154,8 +141,7 @@ module EditPage =
 
     let trySaveAsync model dbPath =
         async {
-            if not model.IsFirstNameValid
-               || not model.IsLastNameValid then
+            if not model.IsFirstNameValid || not model.IsLastNameValid then
                 do! sayContactNotValidAsync()
                 return None
             else
@@ -218,16 +204,16 @@ module EditPage =
         | UpdateFirstName v ->
             let m =
                 { model with
-                      FirstName = v
-                      IsFirstNameValid = (validateFirstName v) }
+                    FirstName = v
+                    IsFirstNameValid = (validateFirstName v) }
 
             m, Cmd.none, ExternalMsg.NoOp
 
         | UpdateLastName v ->
             let m =
                 { model with
-                      LastName = v
-                      IsLastNameValid = (validateLastName v) }
+                    LastName = v
+                    IsLastNameValid = (validateLastName v) }
 
             m, Cmd.none, ExternalMsg.NoOp
 
@@ -261,8 +247,7 @@ module EditPage =
 
     let view model =
         let title =
-            let fullName =
-                $"%s{model.FirstName} %s{model.LastName}".Trim()
+            let fullName = $"%s{model.FirstName} %s{model.LastName}".Trim()
 
             match model.Contact, fullName.Trim() with
             | None, "" -> Strings.EditPage_Title_NewContact
@@ -276,25 +261,15 @@ module EditPage =
                     (Grid(coldefs = [ Absolute 100.; Star ], rowdefs = [ Absolute 50.; Absolute 50. ]) {
                         profilePictureButton model.Picture UpdatePicture
 
-                        (formEntry
-                            Strings.EditPage_FirstNameField_Label
-                            model.FirstName
-                            Keyboard.Text
-                            model.IsFirstNameValid
-                            UpdateFirstName)
+                        (formEntry Strings.EditPage_FirstNameField_Label model.FirstName Keyboard.Text model.IsFirstNameValid UpdateFirstName)
                             .centerVertical()
                             .gridColumn(1)
 
-                        (formEntry
-                            Strings.EditPage_LastNameField_Label
-                            model.LastName
-                            Keyboard.Text
-                            model.IsLastNameValid
-                            UpdateLastName)
+                        (formEntry Strings.EditPage_LastNameField_Label model.LastName Keyboard.Text model.IsLastNameValid UpdateLastName)
                             .centerVertical()
                             .gridColumn(1)
                             .gridRow(1)
-                     })
+                    })
                         .columnSpacing(10.)
                         .rowSpacing(0.)
 
@@ -310,8 +285,10 @@ module EditPage =
                     | None -> ()
                     | Some x when x.Id = 0 -> ()
                     | Some contact -> destroyButton Strings.EditPage_DeleteButtonText (DeleteContact contact)
-                 })
+                })
                     .padding(Thickness(20.))
             )
         )
-            .toolbarItems() { toolbarButton Strings.EditPage_Toolbar_SaveContact SaveContact }
+            .toolbarItems() {
+            toolbarButton Strings.EditPage_Toolbar_SaveContact SaveContact
+        }

@@ -34,11 +34,7 @@ type RotateToData =
       Easing: Easing }
 
 module VisualElementUpdaters =
-    let updateVisualElementFocus
-        (oldValueOpt: ValueEventData<bool, bool> voption)
-        (newValueOpt: ValueEventData<bool, bool> voption)
-        (node: IViewNode)
-        =
+    let updateVisualElementFocus (oldValueOpt: ValueEventData<bool, bool> voption) (newValueOpt: ValueEventData<bool, bool> voption) (node: IViewNode) =
         let target = node.Target :?> VisualElement
 
         let onEventName = "Focus_On"
@@ -74,8 +70,7 @@ module VisualElementUpdaters =
             | ValueSome handler -> offEvent.RemoveHandler(handler)
 
             // Change the focus state, except if the old value was the same
-            if oldValueOpt.IsSome
-               && oldValueOpt.Value.Value = curr.Value then
+            if oldValueOpt.IsSome && oldValueOpt.Value.Value = curr.Value then
                 ()
             else
                 match struct (curr.Value, target.IsFocused) with
@@ -85,29 +80,25 @@ module VisualElementUpdaters =
 
             // Set the new event handlers
             let onHandler =
-                EventHandler<FocusEventArgs>
-                    (fun sender args ->
-                        let r = curr.Event true
-                        Dispatcher.dispatch node r)
+                EventHandler<FocusEventArgs>(fun sender args ->
+                    let r = curr.Event true
+                    Dispatcher.dispatch node r)
 
             node.SetHandler(onEventName, ValueSome onHandler)
             onEvent.AddHandler(onHandler)
 
             let offHandler =
-                EventHandler<FocusEventArgs>
-                    (fun sender args ->
-                        let r = curr.Event false
-                        Dispatcher.dispatch node r)
+                EventHandler<FocusEventArgs>(fun sender args ->
+                    let r = curr.Event false
+                    Dispatcher.dispatch node r)
 
             node.SetHandler(offEventName, ValueSome offHandler)
             offEvent.AddHandler(offHandler)
 
 module VisualElement =
-    let AnchorX =
-        Attributes.defineBindableFloat VisualElement.AnchorXProperty
+    let AnchorX = Attributes.defineBindableFloat VisualElement.AnchorXProperty
 
-    let AnchorY =
-        Attributes.defineBindableFloat VisualElement.AnchorYProperty
+    let AnchorY = Attributes.defineBindableFloat VisualElement.AnchorYProperty
 
     let BackgroundColor =
         Attributes.defineBindableAppThemeColor VisualElement.BackgroundColorProperty
@@ -115,8 +106,7 @@ module VisualElement =
     let Background =
         Attributes.defineBindableAppTheme<Brush> VisualElement.BackgroundProperty
 
-    let Clip =
-        Attributes.defineBindableWidget VisualElement.ClipProperty
+    let Clip = Attributes.defineBindableWidget VisualElement.ClipProperty
 
     let FlowDirection =
         Attributes.defineBindableEnum<FlowDirection> VisualElement.FlowDirectionProperty
@@ -124,20 +114,16 @@ module VisualElement =
     let HeightRequest =
         Attributes.defineBindableFloat VisualElement.HeightRequestProperty
 
-    let WidthRequest =
-        Attributes.defineBindableFloat VisualElement.WidthRequestProperty
+    let WidthRequest = Attributes.defineBindableFloat VisualElement.WidthRequestProperty
 
     let InputTransparent =
         Attributes.defineBindableBool VisualElement.InputTransparentProperty
 
-    let IsEnabled =
-        Attributes.defineBindableBool VisualElement.IsEnabledProperty
+    let IsEnabled = Attributes.defineBindableBool VisualElement.IsEnabledProperty
 
-    let IsTabStop =
-        Attributes.defineBindableBool VisualElement.IsTabStopProperty
+    let IsTabStop = Attributes.defineBindableBool VisualElement.IsTabStopProperty
 
-    let IsVisible =
-        Attributes.defineBindableBool VisualElement.IsVisibleProperty
+    let IsVisible = Attributes.defineBindableBool VisualElement.IsVisibleProperty
 
     let MinimumHeightRequest =
         Attributes.defineBindableFloat VisualElement.MinimumHeightRequestProperty
@@ -145,146 +131,95 @@ module VisualElement =
     let MinimumWidthRequest =
         Attributes.defineBindableFloat VisualElement.MinimumWidthRequestProperty
 
-    let Opacity =
-        Attributes.defineBindableFloat VisualElement.OpacityProperty
+    let Opacity = Attributes.defineBindableFloat VisualElement.OpacityProperty
 
-    let TabIndex =
-        Attributes.defineBindableInt VisualElement.TabIndexProperty
+    let TabIndex = Attributes.defineBindableInt VisualElement.TabIndexProperty
 
     let Visual =
         Attributes.defineBindableWithEquality<IVisual> VisualElement.VisualProperty
 
     [<Obsolete("Use FocusWithEvent instead")>]
     let Focused =
-        Attributes.defineEvent<FocusEventArgs>
-            "VisualElement_Focused"
-            (fun target -> (target :?> VisualElement).Focused)
+        Attributes.defineEvent<FocusEventArgs> "VisualElement_Focused" (fun target -> (target :?> VisualElement).Focused)
 
     [<Obsolete("Use FocusWithEvent instead")>]
     let Unfocused =
-        Attributes.defineEvent<FocusEventArgs>
-            "VisualElement_Unfocused"
-            (fun target -> (target :?> VisualElement).Unfocused)
+        Attributes.defineEvent<FocusEventArgs> "VisualElement_Unfocused" (fun target -> (target :?> VisualElement).Unfocused)
 
     let TranslateTo =
-        Attributes.defineSimpleScalarWithEquality<TranslateToData>
-            "View_TranslateTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<TranslateToData> "View_TranslateTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone ->
-                    view.TranslateTo(0., 0., uint 0, Easing.Linear)
-                    |> ignore
-                | ValueSome data ->
-                    view.TranslateTo(data.X, data.Y, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.TranslateTo(0., 0., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.TranslateTo(data.X, data.Y, data.AnimationDuration, data.Easing) |> ignore)
 
-    let TranslationX =
-        Attributes.defineBindableFloat VisualElement.TranslationXProperty
+    let TranslationX = Attributes.defineBindableFloat VisualElement.TranslationXProperty
 
-    let TranslationY =
-        Attributes.defineBindableFloat VisualElement.TranslationYProperty
+    let TranslationY = Attributes.defineBindableFloat VisualElement.TranslationYProperty
 
     let ScaleTo =
-        Attributes.defineSimpleScalarWithEquality<ScaleToData>
-            "View_ScaleTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<ScaleToData> "View_ScaleTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone -> view.ScaleTo(1., uint 0, Easing.Linear) |> ignore
-                | ValueSome data ->
-                    view.ScaleTo(data.Scale, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.ScaleTo(1., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.ScaleTo(data.Scale, data.AnimationDuration, data.Easing) |> ignore)
 
-    let ScaleX =
-        Attributes.defineBindableFloat VisualElement.ScaleXProperty
+    let ScaleX = Attributes.defineBindableFloat VisualElement.ScaleXProperty
 
     let ScaleXTo =
-        Attributes.defineSimpleScalarWithEquality<ScaleToData>
-            "View_ScaleXTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<ScaleToData> "View_ScaleXTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone -> view.ScaleXTo(1., uint 0, Easing.Linear) |> ignore
-                | ValueSome data ->
-                    view.ScaleXTo(data.Scale, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.ScaleXTo(1., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.ScaleXTo(data.Scale, data.AnimationDuration, data.Easing) |> ignore)
 
-    let ScaleY =
-        Attributes.defineBindableFloat VisualElement.ScaleYProperty
+    let ScaleY = Attributes.defineBindableFloat VisualElement.ScaleYProperty
 
     let ScaleYTo =
-        Attributes.defineSimpleScalarWithEquality<ScaleToData>
-            "View_ScaleYTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<ScaleToData> "View_ScaleYTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone -> view.ScaleYTo(1., uint 0, Easing.Linear) |> ignore
-                | ValueSome data ->
-                    view.ScaleYTo(data.Scale, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.ScaleYTo(1., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.ScaleYTo(data.Scale, data.AnimationDuration, data.Easing) |> ignore)
 
     let FadeTo =
-        Attributes.defineSimpleScalarWithEquality<FadeToData>
-            "View_FadeTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<FadeToData> "View_FadeTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone -> view.FadeTo(0., uint 0, Easing.Linear) |> ignore
-                | ValueSome data ->
-                    view.FadeTo(data.Opacity, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.FadeTo(0., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.FadeTo(data.Opacity, data.AnimationDuration, data.Easing) |> ignore)
 
     let RotateTo =
-        Attributes.defineSimpleScalarWithEquality<RotateToData>
-            "View_RotateTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<RotateToData> "View_RotateTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone -> view.RotateTo(0., uint 0, Easing.Linear) |> ignore
-                | ValueSome data ->
-                    view.RotateTo(data.Rotation, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.RotateTo(0., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.RotateTo(data.Rotation, data.AnimationDuration, data.Easing) |> ignore)
 
     let RotateXTo =
-        Attributes.defineSimpleScalarWithEquality<RotateToData>
-            "View_RotateXTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<RotateToData> "View_RotateXTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone ->
-                    view.RotateXTo(0., uint 0, Easing.Linear)
-                    |> ignore
-                | ValueSome data ->
-                    view.RotateXTo(data.Rotation, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.RotateXTo(0., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.RotateXTo(data.Rotation, data.AnimationDuration, data.Easing) |> ignore)
 
     let RotateYTo =
-        Attributes.defineSimpleScalarWithEquality<RotateToData>
-            "View_RotateYTo"
-            (fun _ newValueOpt node ->
-                let view = node.Target :?> View
+        Attributes.defineSimpleScalarWithEquality<RotateToData> "View_RotateYTo" (fun _ newValueOpt node ->
+            let view = node.Target :?> View
 
-                match newValueOpt with
-                | ValueNone ->
-                    view.RotateYTo(0., uint 0, Easing.Linear)
-                    |> ignore
-                | ValueSome data ->
-                    view.RotateYTo(data.Rotation, data.AnimationDuration, data.Easing)
-                    |> ignore)
+            match newValueOpt with
+            | ValueNone -> view.RotateYTo(0., uint 0, Easing.Linear) |> ignore
+            | ValueSome data -> view.RotateYTo(data.Rotation, data.AnimationDuration, data.Easing) |> ignore)
 
     let FocusWithEvent =
-        Attributes.defineSimpleScalar
-            "VisualElement_FocusWithEvent"
-            ScalarAttributeComparers.noCompare
-            VisualElementUpdaters.updateVisualElementFocus
+        Attributes.defineSimpleScalar "VisualElement_FocusWithEvent" ScalarAttributeComparers.noCompare VisualElementUpdaters.updateVisualElementFocus
 
 [<Extension>]
 type VisualElementModifiers =
@@ -331,17 +266,8 @@ type VisualElementModifiers =
     /// <param name="isFocused">The focus state</param>
     /// <param name="onFocusChange">The message to dispatch when the focus state changes</param>
     [<Extension>]
-    static member inline focus
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            isFocused: bool,
-            onFocusChanged: bool -> 'msg
-        ) =
-        this.AddScalar(
-            VisualElement.FocusWithEvent.WithValue(
-                ValueEventData.create isFocused (fun args -> onFocusChanged args |> box)
-            )
-        )
+    static member inline focus(this: WidgetBuilder<'msg, #IVisualElement>, isFocused: bool, onFocusChanged: bool -> 'msg) =
+        this.AddScalar(VisualElement.FocusWithEvent.WithValue(ValueEventData.create isFocused (fun args -> onFocusChanged args |> box)))
 
     /// <summary>Sets the height of the element.</summary>
     [<Extension>]
@@ -437,13 +363,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline fadeTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            opacity: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline fadeTo(this: WidgetBuilder<'msg, #IVisualElement>, opacity: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.FadeTo.WithValue(
                 { Opacity = opacity
@@ -457,13 +377,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline rotateTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            rotation: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline rotateTo(this: WidgetBuilder<'msg, #IVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.RotateTo.WithValue(
                 { Rotation = rotation
@@ -477,13 +391,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline rotateXTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            rotation: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline rotateXTo(this: WidgetBuilder<'msg, #IVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.RotateXTo.WithValue(
                 { Rotation = rotation
@@ -497,13 +405,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline rotateYTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            rotation: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline rotateYTo(this: WidgetBuilder<'msg, #IVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.RotateYTo.WithValue(
                 { Rotation = rotation
@@ -523,13 +425,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline scaleTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            scale: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline scaleTo(this: WidgetBuilder<'msg, #IVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.ScaleTo.WithValue(
                 { Scale = scale
@@ -543,13 +439,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline scaleXTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            scale: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline scaleXTo(this: WidgetBuilder<'msg, #IVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.ScaleXTo.WithValue(
                 { Scale = scale
@@ -569,13 +459,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The time, in milliseconds, over which to animate the transition. The default is 250.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline scaleYTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            scale: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline scaleYTo(this: WidgetBuilder<'msg, #IVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.ScaleYTo.WithValue(
                 { Scale = scale
@@ -590,14 +474,7 @@ type VisualElementAnimationModifiers =
     /// <param name="duration">The duration of the animation in milliseconds.</param>
     /// <param name="easing">The easing of the animation.</param>
     [<Extension>]
-    static member inline translateTo
-        (
-            this: WidgetBuilder<'msg, #IVisualElement>,
-            x: float,
-            y: float,
-            duration: int,
-            easing: Easing
-        ) =
+    static member inline translateTo(this: WidgetBuilder<'msg, #IVisualElement>, x: float, y: float, duration: int, easing: Easing) =
         this.AddScalar(
             VisualElement.TranslateTo.WithValue(
                 { X = x

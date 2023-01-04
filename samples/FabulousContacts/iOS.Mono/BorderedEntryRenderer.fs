@@ -7,8 +7,7 @@ open Xamarin.Forms.Platform.iOS
 type BorderedEntryRenderer() =
     inherit EntryRenderer()
 
-    member this.BorderedEntry =
-        this.Element :?> FabulousContacts.Controls.BorderedEntry
+    member this.BorderedEntry = this.Element :?> FabulousContacts.Controls.BorderedEntry
 
     override this.OnElementChanged(e) =
         base.OnElementChanged(e)
@@ -27,6 +26,5 @@ type BorderedEntryRenderer() =
             this.Control.Layer.CornerRadius <- nfloat 5.
 
 module Dummy_BorderedEntryRenderer =
-    [<assembly: Xamarin.Forms.ExportRenderer(typeof<FabulousContacts.Controls.BorderedEntry>,
-                                             typeof<BorderedEntryRenderer>)>]
+    [<assembly: Xamarin.Forms.ExportRenderer(typeof<FabulousContacts.Controls.BorderedEntry>, typeof<BorderedEntryRenderer>)>]
     do ()

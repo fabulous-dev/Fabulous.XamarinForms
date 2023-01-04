@@ -10,15 +10,12 @@ type UnderlinedLabelRenderer() =
         base.OnElementChanged(e)
 
         if (e.NewElement <> null) then
-            this.Control.AttributedText <-
-                new NSAttributedString(str = this.Element.Text, underlineStyle = NSUnderlineStyle.Single)
+            this.Control.AttributedText <- new NSAttributedString(str = this.Element.Text, underlineStyle = NSUnderlineStyle.Single)
 
     override this.OnElementPropertyChanged(_, e) =
         if e.PropertyName = "Text" then
-            this.Control.AttributedText <-
-                new NSAttributedString(str = this.Element.Text, underlineStyle = NSUnderlineStyle.Single)
+            this.Control.AttributedText <- new NSAttributedString(str = this.Element.Text, underlineStyle = NSUnderlineStyle.Single)
 
 module Dummy_UnderlinedLabelRenderer =
-    [<assembly: Xamarin.Forms.ExportRenderer(typeof<FabulousContacts.Controls.UnderlinedLabel>,
-                                             typeof<UnderlinedLabelRenderer>)>]
+    [<assembly: Xamarin.Forms.ExportRenderer(typeof<FabulousContacts.Controls.UnderlinedLabel>, typeof<UnderlinedLabelRenderer>)>]
     do ()

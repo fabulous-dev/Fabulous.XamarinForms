@@ -19,8 +19,7 @@ module SearchBar =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> SearchBar.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat SearchBar.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat SearchBar.FontSizeProperty
 
     let HorizontalTextAlignment =
         Attributes.defineBindableEnum<TextAlignment> SearchBar.HorizontalTextAlignmentProperty
@@ -29,19 +28,16 @@ module SearchBar =
         Attributes.defineBindableEnum<TextAlignment> SearchBar.VerticalTextAlignmentProperty
 
     let SearchButtonPressed =
-        Attributes.defineEventNoArg
-            "SearchBar_SearchButtonPressed"
-            (fun target -> (target :?> SearchBar).SearchButtonPressed)
+        Attributes.defineEventNoArg "SearchBar_SearchButtonPressed" (fun target -> (target :?> SearchBar).SearchButtonPressed)
 
 [<AutoOpen>]
 module SearchBarBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline SearchBar<'msg>(text: string, onTextChanged: string -> 'msg, onSearchButtonPressed: 'msg) =
             WidgetBuilder<'msg, ISearchBar>(
                 SearchBar.WidgetKey,
-                InputView.TextWithEvent.WithValue(
-                    ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box)
-                ),
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box)),
                 SearchBar.SearchButtonPressed.WithValue(onSearchButtonPressed)
             )
 
@@ -55,14 +51,7 @@ type SearchBarModifiers =
         this.AddScalar(SearchBar.CancelButtonColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #ISearchBar>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #ISearchBar>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 

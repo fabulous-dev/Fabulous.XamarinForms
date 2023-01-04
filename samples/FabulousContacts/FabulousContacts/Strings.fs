@@ -27,8 +27,7 @@ module Strings =
     let DetailPage_Toolbar_EditContact = "Edit"
     let EditPage_DeleteContact firstName lastName = $"Delete %s{firstName} %s{lastName}"
 
-    let EditPage_DeleteContactConfirmation =
-        "This action is definitive. Are you sure?"
+    let EditPage_DeleteContactConfirmation = "This action is definitive. Are you sure?"
 
     let EditPage_InvalidContactTitle = "Invalid contact"
     let EditPage_InvalidContactDescription = "Please fill all mandatory fields"

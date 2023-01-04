@@ -13,8 +13,7 @@ module Span =
     let BackgroundColor =
         Attributes.defineBindableAppThemeColor Span.BackgroundColorProperty
 
-    let CharacterSpacing =
-        Attributes.defineBindableFloat Span.CharacterSpacingProperty
+    let CharacterSpacing = Attributes.defineBindableFloat Span.CharacterSpacingProperty
 
     let FontAttributes =
         Attributes.defineBindableEnum<FontAttributes> Span.FontAttributesProperty
@@ -22,17 +21,13 @@ module Span =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> Span.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat Span.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat Span.FontSizeProperty
 
-    let LineHeight =
-        Attributes.defineBindableFloat Span.LineHeightProperty
+    let LineHeight = Attributes.defineBindableFloat Span.LineHeightProperty
 
-    let Style =
-        Attributes.defineBindableWithEquality<Style> Span.StyleProperty
+    let Style = Attributes.defineBindableWithEquality<Style> Span.StyleProperty
 
-    let TextColor =
-        Attributes.defineBindableAppThemeColor Span.TextColorProperty
+    let TextColor = Attributes.defineBindableAppThemeColor Span.TextColorProperty
 
     let TextDecorations =
         Attributes.defineBindableEnum<TextDecorations> Span.TextDecorationsProperty
@@ -40,17 +35,15 @@ module Span =
     let TextTransform =
         Attributes.defineBindableEnum<TextTransform> Span.TextTransformProperty
 
-    let Text =
-        Attributes.defineBindableWithEquality<string> Span.TextProperty
+    let Text = Attributes.defineBindableWithEquality<string> Span.TextProperty
 
     let GestureRecognizers =
-        Attributes.defineListWidgetCollection<IGestureRecognizer>
-            "Span_GestureRecognizers"
-            (fun target -> (target :?> Span).GestureRecognizers)
+        Attributes.defineListWidgetCollection<IGestureRecognizer> "Span_GestureRecognizers" (fun target -> (target :?> Span).GestureRecognizers)
 
 [<AutoOpen>]
 module SpanBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline Span<'msg>(text: string) =
             WidgetBuilder<'msg, ISpan>(Span.WidgetKey, Span.Text.WithValue(text))
 
@@ -66,14 +59,7 @@ type SpanModifiers =
         this.AddScalar(Span.CharacterSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #ISpan>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #ISpan>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 
@@ -117,9 +103,7 @@ type SpanModifiers =
 
     [<Extension>]
     static member inline gestureRecognizers<'msg, 'marker when 'marker :> ISpan>(this: WidgetBuilder<'msg, 'marker>) =
-        WidgetHelpers.buildAttributeCollection<'msg, 'marker, Fabulous.XamarinForms.IGestureRecognizer>
-            Span.GestureRecognizers
-            this
+        WidgetHelpers.buildAttributeCollection<'msg, 'marker, Fabulous.XamarinForms.IGestureRecognizer> Span.GestureRecognizers this
 
     /// <summary>Link a ViewRef to access the direct Span control instance</summary>
     [<Extension>]

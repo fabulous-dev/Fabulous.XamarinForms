@@ -37,15 +37,15 @@ module App =
     let initModel =
         { CurrentCityIndex = 0
           Cities =
-              [| { Name = "Seattle"
-                   Data = None
-                   IsRefreshing = true }
-                 { Name = "New York"
-                   Data = None
-                   IsRefreshing = true }
-                 { Name = "Paris"
-                   Data = None
-                   IsRefreshing = true } |] }
+            [| { Name = "Seattle"
+                 Data = None
+                 IsRefreshing = true }
+               { Name = "New York"
+                 Data = None
+                 IsRefreshing = true }
+               { Name = "Paris"
+                 Data = None
+                 IsRefreshing = true } |] }
 
     let init () =
         let cmd =
@@ -58,52 +58,38 @@ module App =
         | GoToPreviousCity ->
             let prevIndex = Math.Max(0, model.CurrentCityIndex - 1)
 
-            { model with
-                  CurrentCityIndex = prevIndex },
-            Cmd.none
+            { model with CurrentCityIndex = prevIndex }, Cmd.none
 
         | GoToNextCity ->
             let nextIndex = Math.Max(0, model.CurrentCityIndex + 1)
 
-            { model with
-                  CurrentCityIndex = nextIndex },
-            Cmd.none
+            { model with CurrentCityIndex = nextIndex }, Cmd.none
 
         | RequestRefresh index ->
             let updatedCities =
                 model.Cities
-                |> Array.mapi
-                    (fun i c ->
-                        if i = index then
-                            { c with IsRefreshing = true }
-                        else
-                            c)
+                |> Array.mapi(fun i c -> if i = index then { c with IsRefreshing = true } else c)
 
-            let cmd =
-                getWeatherForCityAsync index model.Cities.[index].Name
+            let cmd = getWeatherForCityAsync index model.Cities.[index].Name
 
             { model with Cities = updatedCities }, cmd
 
-        | WeatherRefreshed (index, data) ->
+        | WeatherRefreshed(index, data) ->
             let updatedCities =
                 model.Cities
-                |> Array.mapi
-                    (fun i c ->
-                        if i = index then
-                            { c with
-                                  IsRefreshing = false
-                                  Data = Some data }
-                        else
-                            c)
+                |> Array.mapi(fun i c ->
+                    if i = index then
+                        { c with
+                            IsRefreshing = false
+                            Data = Some data }
+                    else
+                        c)
 
             { model with Cities = updatedCities }, Cmd.none
 
     let previousNextView model =
         (Grid() {
-            cityView
-                model.CurrentCityIndex
-                model.Cities.[model.CurrentCityIndex]
-                (RequestRefresh model.CurrentCityIndex)
+            cityView model.CurrentCityIndex model.Cities.[model.CurrentCityIndex] (RequestRefresh model.CurrentCityIndex)
 
             if model.CurrentCityIndex > 0 then
                 Button($"< {model.Cities.[model.CurrentCityIndex - 1].Name}", GoToPreviousCity)
@@ -116,7 +102,7 @@ module App =
                     .alignEndHorizontal()
                     .alignStartVertical()
                     .margin(0., 0., 20., 0.)
-         })
+        })
             .padding(0., 35., 0., 0.)
 
     let view model =
@@ -126,10 +112,7 @@ module App =
             |> Option.defaultValue 0<kelvin>
 
         Application(
-            ContentPage(
-                "Weather",
-                PancakeView(Styles.gradientStops temperatureOfCurrentCity, ContentView(previousNextView model))
-            )
+            ContentPage("Weather", PancakeView(Styles.gradientStops temperatureOfCurrentCity, ContentView(previousNextView model)))
                 .ignoreSafeArea()
         )
     //.resources([

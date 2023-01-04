@@ -18,20 +18,15 @@ module ImageButton =
     let BorderColor =
         Attributes.defineBindableAppThemeColor ImageButton.BorderColorProperty
 
-    let BorderWidth =
-        Attributes.defineBindableFloat ImageButton.BorderWidthProperty
+    let BorderWidth = Attributes.defineBindableFloat ImageButton.BorderWidthProperty
 
-    let CornerRadius =
-        Attributes.defineBindableFloat ImageButton.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableFloat ImageButton.CornerRadiusProperty
 
-    let IsLoading =
-        Attributes.defineBindableBool ImageButton.IsLoadingProperty
+    let IsLoading = Attributes.defineBindableBool ImageButton.IsLoadingProperty
 
-    let IsOpaque =
-        Attributes.defineBindableBool ImageButton.IsOpaqueProperty
+    let IsOpaque = Attributes.defineBindableBool ImageButton.IsOpaqueProperty
 
-    let IsPressed =
-        Attributes.defineBindableBool ImageButton.IsPressedProperty
+    let IsPressed = Attributes.defineBindableBool ImageButton.IsPressedProperty
 
     let Padding =
         Attributes.defineBindableWithEquality<Thickness> ImageButton.PaddingProperty
@@ -51,13 +46,8 @@ module ImageButton =
 [<AutoOpen>]
 module ImageButtonBuilders =
     type Fabulous.XamarinForms.View with
-        static member inline ImageButton<'msg>
-            (
-                aspect: Aspect,
-                light: ImageSource,
-                onClicked: 'msg,
-                ?dark: ImageSource
-            ) =
+
+        static member inline ImageButton<'msg>(aspect: Aspect, light: ImageSource, onClicked: 'msg, ?dark: ImageSource) =
             WidgetBuilder<'msg, IImageButton>(
                 ImageButton.WidgetKey,
                 ImageButton.Aspect.WithValue(aspect),
@@ -137,14 +127,7 @@ type ImageButtonModifiers =
         ImageButtonModifiers.padding(this, Thickness(value))
 
     [<Extension>]
-    static member inline padding
-        (
-            this: WidgetBuilder<'msg, #IImageButton>,
-            left: float,
-            top: float,
-            right: float,
-            bottom: float
-        ) =
+    static member inline padding(this: WidgetBuilder<'msg, #IImageButton>, left: float, top: float, right: float, bottom: float) =
         ImageButtonModifiers.padding(this, Thickness(left, top, right, bottom))
 
     /// <summary>Event that is fired when image button is pressed.</summary>

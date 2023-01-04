@@ -19,9 +19,6 @@ module LineGeometry =
 [<AutoOpen>]
 module LineGeometryBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline LineGeometry<'msg>(start: Point, end': Point) =
-            WidgetBuilder<'msg, ILineGeometry>(
-                LineGeometry.WidgetKey,
-                LineGeometry.StartPoint.WithValue(start),
-                LineGeometry.EndPoint.WithValue(end')
-            )
+            WidgetBuilder<'msg, ILineGeometry>(LineGeometry.WidgetKey, LineGeometry.StartPoint.WithValue(start), LineGeometry.EndPoint.WithValue(end'))

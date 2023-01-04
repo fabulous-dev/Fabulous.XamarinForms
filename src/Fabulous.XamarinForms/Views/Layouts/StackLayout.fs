@@ -13,20 +13,15 @@ module StackLayout =
     let Orientation =
         Attributes.defineBindableEnum<StackOrientation> StackLayout.OrientationProperty
 
-    let Spacing =
-        Attributes.defineBindableFloat StackLayout.SpacingProperty
+    let Spacing = Attributes.defineBindableFloat StackLayout.SpacingProperty
 
 [<AutoOpen>]
 module StackLayoutBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline private StackLayout<'msg>(orientation: StackOrientation, ?spacing: float) =
             match spacing with
-            | None ->
-                CollectionBuilder<'msg, IStackLayout, IView>(
-                    StackLayout.WidgetKey,
-                    LayoutOfView.Children,
-                    StackLayout.Orientation.WithValue(orientation)
-                )
+            | None -> CollectionBuilder<'msg, IStackLayout, IView>(StackLayout.WidgetKey, LayoutOfView.Children, StackLayout.Orientation.WithValue(orientation))
 
             | Some v ->
                 CollectionBuilder<'msg, IStackLayout, IView>(

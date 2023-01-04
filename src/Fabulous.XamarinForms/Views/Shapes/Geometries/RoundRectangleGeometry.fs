@@ -11,8 +11,7 @@ type IRoundRectangleGeometry =
 
 module RoundRectangleGeometry =
 
-    let WidgetKey =
-        Widgets.register<RoundRectangleGeometry>()
+    let WidgetKey = Widgets.register<RoundRectangleGeometry>()
 
     let CornerRadius =
         Attributes.defineBindableWithEquality<CornerRadius> RoundRectangleGeometry.CornerRadiusProperty
@@ -26,6 +25,7 @@ module RoundRectangleGeometry =
 [<AutoOpen>]
 module RoundRectangleGeometryBuilders =
     type Fabulous.XamarinForms.View with
+
         [<Obsolete("Use RoundRectangleGeometry(cornerRadius: CornerRadius, rect: Rect) instead")>]
         static member inline RoundRectangleGeometry<'msg>(cornerRadius: float, rect: Rect) =
             WidgetBuilder<'msg, IRoundRectangleGeometry>(

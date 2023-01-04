@@ -19,6 +19,7 @@ module ViewCell =
 [<AutoOpen>]
 module ViewCellBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline ViewCell<'msg, 'marker when 'marker :> IView>(view: WidgetBuilder<'msg, 'marker>) =
             WidgetHelpers.buildWidgets<'msg, IViewCell> ViewCell.WidgetKey [| ViewCell.View.WithValue(view.Compile()) |]
 

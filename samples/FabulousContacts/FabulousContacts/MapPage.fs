@@ -35,16 +35,14 @@ module MapPage =
     let tryGetUserPositionAsync () =
         async {
             try
-                let! location =
-                    Geolocation.GetLastKnownLocationAsync()
-                    |> Async.AwaitTask
+                let! location = Geolocation.GetLastKnownLocationAsync() |> Async.AwaitTask
 
                 return
                     location
                     |> Option.ofObj
                     |> Option.map(fun l -> UserPositionRetrieved(l.Latitude, l.Longitude))
-            with
-            | _ -> return None
+            with _ ->
+                return None
         }
         |> Cmd.ofAsyncMsgOption
 
@@ -56,19 +54,16 @@ module MapPage =
                 let gettingPositions =
                     contacts
                     |> List.filter(fun c -> c.Address |> (not << String.IsNullOrWhiteSpace))
-                    |> List.map
-                        (fun c ->
-                            async {
-                                try
-                                    let! positions =
-                                        geocoder.GetPositionsForAddressAsync(c.Address)
-                                        |> Async.AwaitTask
+                    |> List.map(fun c ->
+                        async {
+                            try
+                                let! positions = geocoder.GetPositionsForAddressAsync(c.Address) |> Async.AwaitTask
 
-                                    let position = positions |> Seq.tryHead
-                                    return Some(c, position)
-                                with
-                                | _ -> return None
-                            })
+                                let position = positions |> Seq.tryHead
+                                return Some(c, position)
+                            with _ ->
+                                return None
+                        })
                     |> Async.Parallel
 
                 let! contactsAndPositions = gettingPositions
@@ -78,17 +73,15 @@ module MapPage =
                     |> Array.filter Option.isSome
                     |> Array.map(fun v -> v.Value)
                     |> Array.filter(snd >> Option.isSome)
-                    |> Array.map
-                        (fun (c, p) ->
-                            { Position = p.Value
-                              Label = $"%s{c.FirstName} %s{c.LastName}"
-                              PinType = PinType.Place
-                              Address = c.Address })
+                    |> Array.map(fun (c, p) ->
+                        { Position = p.Value
+                          Label = $"%s{c.FirstName} %s{c.LastName}"
+                          PinType = PinType.Place
+                          Address = c.Address })
                     |> Array.toList
 
                 return Some(PinsLoaded pins)
-            with
-            | exn ->
+            with exn ->
                 do! displayAlert(Strings.MapPage_MapLoadFailed, exn.Message, Strings.Common_OK)
                 return None
         }
@@ -98,9 +91,7 @@ module MapPage =
     let paris = Position(48.8566, 2.3522)
 
     let getUserPositionOrDefault (userPosition: (double * double) option) =
-        userPosition
-        |> Option.map Position
-        |> Option.defaultValue paris
+        userPosition |> Option.map Position |> Option.defaultValue paris
 
     // Lifecycle
     let initModel = { Pins = None; UserPosition = None }
@@ -115,10 +106,7 @@ module MapPage =
 
         | PinsLoaded pins -> { model with Pins = Some pins }, Cmd.none
 
-        | UserPositionRetrieved location ->
-            { model with
-                  UserPosition = Some location },
-            Cmd.none
+        | UserPositionRetrieved location -> { model with UserPosition = Some location }, Cmd.none
 
     let view model =
         let map userPositionOpt pins =
@@ -127,9 +115,8 @@ module MapPage =
 
             (Map(requestedRegion) {
                 for pin in pins do
-                    Pin(pin.PinType, pin.Label, pin.Position)
-                        .address(pin.Address)
-             })
+                    Pin(pin.PinType, pin.Label, pin.Position).address(pin.Address)
+            })
                 .withZoom()
                 .withScroll()
 

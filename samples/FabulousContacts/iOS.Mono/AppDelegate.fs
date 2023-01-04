@@ -16,11 +16,9 @@ type AppDelegate() =
     inherit FormsApplicationDelegate()
 
     let getDbPath () =
-        let docFolder =
-            Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+        let docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
 
-        let libFolder =
-            Path.Combine(docFolder, "..", "Library", "Databases")
+        let libFolder = Path.Combine(docFolder, "..", "Library", "Databases")
 
         if not(Directory.Exists libFolder) then
             Directory.CreateDirectory(libFolder) |> ignore
@@ -33,14 +31,11 @@ type AppDelegate() =
         Forms.Init()
         FormsMaps.Init()
 
-        CrossMedia.Current.Initialize()
-        |> Async.AwaitTask
-        |> ignore
+        CrossMedia.Current.Initialize() |> Async.AwaitTask |> ignore
 
         let dbPath = getDbPath()
 
-        let application =
-            Program.startApplicationWithArgs dbPath App.program
+        let application = Program.startApplicationWithArgs dbPath App.program
 
         this.LoadApplication(application)
         base.FinishedLaunching(app, options)

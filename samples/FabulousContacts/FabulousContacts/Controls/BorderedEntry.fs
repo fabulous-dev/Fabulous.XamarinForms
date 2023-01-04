@@ -21,18 +21,16 @@ type IBorderedEntry =
 module BorderedEntry =
     let WidgetKey = Widgets.register<BorderedEntry>()
 
-    let BorderColor =
-        Attributes.defineBindableColor BorderedEntry.BorderColorProperty
+    let BorderColor = Attributes.defineBindableColor BorderedEntry.BorderColorProperty
 
 [<AutoOpen>]
 module EntryBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline BorderedEntry<'msg>(text, onTextChanged: string -> 'msg) =
             WidgetBuilder<'msg, IBorderedEntry>(
                 BorderedEntry.WidgetKey,
-                InputView.TextWithEvent.WithValue(
-                    ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box)
-                )
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
             )
 
 [<AutoOpen>]
