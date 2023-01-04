@@ -1,15 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>Fabulous.XamarinForms</PackageId>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <!-- NuGet Package -->
+  <PropertyGroup>
+    <Description>Xamarin.Forms implementation for Fabulous - declarative UI with F# and MVU</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageReadmeFile>PackageREADME.md</PackageReadmeFile>
-    <PackageIcon>nuget-icon.png</PackageIcon>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/fabulous-dev/Fabulous.XamarinForms</RepositoryUrl>
-    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <DebugType>embedded</DebugType>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+  <!-- SourceLink -->
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(GITHUB_ACTIONS) == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="PackageREADME.md" Pack="true" PackagePath="\" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\logo\nuget-icon.png" Pack="true" PackagePath="\" />
     <Compile Include="ViewNode.fs" />
     <Compile Include="FabColor.fs" />
@@ -123,8 +135,13 @@
     <Compile Include="Async.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="7.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
-    <PackageReference Include="Fabulous" Version="2.1.0" />
+    <!--
+      FSharp.Core & Xamarin.Forms are fixed to specific versions that are not necessarily the latest ones.
+      These versions will be used as the lower bounds in the NuGet package
+    -->
+    <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
+    <PackageReference Include="Xamarin.Forms" VersionOverride="5.0.0.1874" />
+    <PackageReference Include="Fabulous" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

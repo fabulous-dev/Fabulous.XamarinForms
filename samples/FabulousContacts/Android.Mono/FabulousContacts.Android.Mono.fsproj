@@ -95,15 +95,15 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="FSharp.Android.Resource" Version="1.0.4" />
-        <PackageReference Include="FSharp.Core" Version="7.0.0" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2515" />
-        <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
-        <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-        <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-        <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+        <PackageReference Include="FSharp.Android.Resource" />
+        <PackageReference Include="FSharp.Core" />
+        <PackageReference Include="Xamarin.Essentials" />
+        <PackageReference Include="Xamarin.Forms" />
+        <PackageReference Include="Xamarin.Forms.Maps" />
+        <PackageReference Include="Xamarin.CommunityToolkit" />
+        <PackageReference Include="Plugin.Permissions" />
+        <PackageReference Include="Xam.Plugin.Media" />
+        <PackageReference Include="sqlite-net-pcl" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.FSharp.targets" />
 </Project>
