@@ -49,7 +49,7 @@ It's the same than above, except you'll need to create `nuget.config` first so t
 Once you configured `nuget.config`, you can run
 
 ```sh
-dotnet new -i Fabulous.XamarinForms.Templates::XYZ
+dotnet new install Fabulous.XamarinForms.Templates::XYZ
 ```
 
 where `XYZ` is the latest version from [Fabulous.XamarinForms.Templates versions](https://github.com/fabulous-dev/Fabulous/packages/1334656/versions).

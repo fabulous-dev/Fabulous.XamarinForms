@@ -35,7 +35,7 @@ First, we need to install the latest templates for Fabulous. This is done via co
 Open a terminal in the folder where you want to store the new solution, and type the following command:
 
 ```sh
-dotnet new -i Fabulous.XamarinForms.Templates
+dotnet new install Fabulous.XamarinForms.Templates
 ```
 
 This will add Fabulous.XamarinForms to the templates available for `dotnet new`.
