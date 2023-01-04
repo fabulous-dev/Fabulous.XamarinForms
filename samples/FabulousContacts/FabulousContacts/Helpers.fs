@@ -32,52 +32,40 @@ module Helpers =
     let requestPermissionAsync<'a when 'a: (new: unit -> 'a) and 'a :> BasePermission> () =
         async {
             try
-                let! status =
-                    CrossPermissions.Current.RequestPermissionAsync<'a>()
-                    |> Async.AwaitTask
+                let! status = CrossPermissions.Current.RequestPermissionAsync<'a>() |> Async.AwaitTask
 
-                return
-                    status = PermissionStatus.Granted
-                    || status = PermissionStatus.Unknown
-            with
-            | _ -> return false
+                return status = PermissionStatus.Granted || status = PermissionStatus.Unknown
+            with _ ->
+                return false
         }
 
     let askPermissionAsync<'a when 'a: (new: unit -> 'a) and 'a :> BasePermission> () =
         async {
             try
-                let! status =
-                    CrossPermissions.Current.CheckPermissionStatusAsync<'a>()
-                    |> Async.AwaitTask
+                let! status = CrossPermissions.Current.CheckPermissionStatusAsync<'a>() |> Async.AwaitTask
 
                 if status = PermissionStatus.Granted then
                     return true
                 else
                     return! requestPermissionAsync<'a>()
-            with
-            | _ -> return false
+            with _ ->
+                return false
         }
 
     let takePictureAsync () =
         async {
-            let options =
-                StoreCameraMediaOptions(PhotoSize = PhotoSize.Small)
+            let options = StoreCameraMediaOptions(PhotoSize = PhotoSize.Small)
 
-            let! picture =
-                CrossMedia.Current.TakePhotoAsync(options)
-                |> Async.AwaitTask
+            let! picture = CrossMedia.Current.TakePhotoAsync(options) |> Async.AwaitTask
 
             return picture |> Option.ofObj
         }
 
     let pickPictureAsync () =
         async {
-            let options =
-                PickMediaOptions(PhotoSize = PhotoSize.Small)
+            let options = PickMediaOptions(PhotoSize = PhotoSize.Small)
 
-            let! picture =
-                CrossMedia.Current.PickPhotoAsync(options)
-                |> Async.AwaitTask
+            let! picture = CrossMedia.Current.PickPhotoAsync(options) |> Async.AwaitTask
 
             return picture |> Option.ofObj
         }
@@ -87,14 +75,12 @@ module Helpers =
             use stream = file.GetStream()
             use memoryStream = new MemoryStream()
 
-            do!
-                stream.CopyToAsync(memoryStream)
-                |> Async.AwaitTask
+            do! stream.CopyToAsync(memoryStream) |> Async.AwaitTask
 
             return memoryStream.ToArray()
         }
 
-    let getImageValueOrDefault (defaultValue: string) aspect (value: byte [] option) =
+    let getImageValueOrDefault (defaultValue: string) aspect (value: byte[] option) =
         match value with
         | None -> Image(aspect, defaultValue)
         | Some bytes -> Image(aspect, new MemoryStream(bytes))

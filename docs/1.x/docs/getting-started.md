@@ -19,7 +19,7 @@ toc: true
 1. Open a command prompt window and install the template pack by entering:
 
 ```sh
-dotnet new -i Fabulous.XamarinForms.Templates
+dotnet new install Fabulous.XamarinForms.Templates
 ```
 
 1. Navigate to a folder in the command prompt window where your new app can be created and enter:

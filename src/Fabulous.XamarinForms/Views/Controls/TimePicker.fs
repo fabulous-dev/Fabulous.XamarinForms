@@ -15,10 +15,7 @@ module TimePicker =
         Attributes.defineBindableFloat TimePicker.CharacterSpacingProperty
 
     let TimeWithEvent =
-        Attributes.defineBindableWithEvent
-            "TimePicker_TimeSelected"
-            TimePicker.TimeProperty
-            (fun target -> (target :?> FabulousTimePicker).TimeSelected)
+        Attributes.defineBindableWithEvent "TimePicker_TimeSelected" TimePicker.TimeProperty (fun target -> (target :?> FabulousTimePicker).TimeSelected)
 
     let FontAttributes =
         Attributes.defineBindableEnum<FontAttributes> TimePicker.FontAttributesProperty
@@ -26,40 +23,34 @@ module TimePicker =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> TimePicker.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat TimePicker.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat TimePicker.FontSizeProperty
 
-    let Format =
-        Attributes.defineBindableWithEquality<string> TimePicker.FormatProperty
+    let Format = Attributes.defineBindableWithEquality<string> TimePicker.FormatProperty
 
-    let TextColor =
-        Attributes.defineBindableAppThemeColor TimePicker.TextColorProperty
+    let TextColor = Attributes.defineBindableAppThemeColor TimePicker.TextColorProperty
 
     let TextTransform =
         Attributes.defineBindableEnum<TextTransform> TimePicker.TextTransformProperty
 
     let UpdateMode =
-        Attributes.defineEnum<iOSSpecific.UpdateMode>
-            "TimePicker_UpdateMode"
-            (fun _ newValueOpt node ->
-                let timePicker = node.Target :?> TimePicker
+        Attributes.defineEnum<iOSSpecific.UpdateMode> "TimePicker_UpdateMode" (fun _ newValueOpt node ->
+            let timePicker = node.Target :?> TimePicker
 
-                let value =
-                    match newValueOpt with
-                    | ValueNone -> iOSSpecific.UpdateMode.Immediately
-                    | ValueSome v -> v
+            let value =
+                match newValueOpt with
+                | ValueNone -> iOSSpecific.UpdateMode.Immediately
+                | ValueSome v -> v
 
-                iOSSpecific.TimePicker.SetUpdateMode(timePicker, value))
+            iOSSpecific.TimePicker.SetUpdateMode(timePicker, value))
 
 [<AutoOpen>]
 module TimePickerBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline TimePicker<'msg>(time: System.TimeSpan, onTimeSelected: System.TimeSpan -> 'msg) =
             WidgetBuilder<'msg, ITimePicker>(
                 TimePicker.WidgetKey,
-                TimePicker.TimeWithEvent.WithValue(
-                    ValueEventData.create time (fun args -> onTimeSelected args.NewTime |> box)
-                )
+                TimePicker.TimeWithEvent.WithValue(ValueEventData.create time (fun args -> onTimeSelected args.NewTime |> box))
             )
 
 [<Extension>]
@@ -81,14 +72,7 @@ type TimePickerModifiers =
         this.AddScalar(TimePicker.TextTransform.WithValue(value))
 
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #ITimePicker>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #ITimePicker>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 

@@ -4,46 +4,12 @@ Fabulous.XamarinForms brings the great development experience of Fabulous to Xam
 
 Deploy to any platform supported by Xamarin.Forms, such as Android, iOS, macOS, Windows, Linux and more!
 
-```fs
-/// A simple Counter app
-
-type Model =
-    { Count: int }
-
-type Msg =
-    | Increment
-    | Decrement
-
-let init () =
-    { Count = 0 }
-
-let update msg model =
-    match msg with
-    | Increment -> { model with Count = model.Count + 1 }
-    | Decrement -> { model with Count = model.Count - 1 }
-
-let view model =
-    Application(
-        ContentPage(
-            "Counter app",
-            VStack(spacing = 16.) {
-                Image(Aspect.AspectFit, "fabulous.png")
-
-                Label($"Count is {model.Count}")
-
-                Button("Increment", Increment)
-                Button("Decrement", Decrement)
-            }
-        )
-    )
-```
-
 ## How to use the templates
 
 Using the dotnet CLI, install the templates:
 
 ```sh
-dotnet new -i Fabulous.XamarinForms.Templates
+dotnet new install Fabulous.XamarinForms.Templates
 ```
 
 Then, you will be able to create new Fabulous.XamarinForms projects with `dotnet new`:
@@ -57,3 +23,7 @@ If you're using Visual Studio on Windows, prefer the `fabulous-xf-vswin` templat
 ```sh
 dotnet new fabulous-xf-vswin -n MyApp
 ```
+
+### Documentation
+
+Documentation can be found at https://docs.fabulous.dev/v2/xamarin.forms

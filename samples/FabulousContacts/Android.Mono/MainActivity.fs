@@ -27,11 +27,12 @@ do ()
            Icon = "@drawable/icon",
            Theme = "@style/FabulousContactsTheme.Splash",
            MainLauncher = true,
-           ConfigurationChanges = (ConfigChanges.ScreenSize
-                                   ||| ConfigChanges.Orientation
-                                   ||| ConfigChanges.UiMode
-                                   ||| ConfigChanges.ScreenLayout
-                                   ||| ConfigChanges.SmallestScreenSize))>]
+           ConfigurationChanges =
+               (ConfigChanges.ScreenSize
+                ||| ConfigChanges.Orientation
+                ||| ConfigChanges.UiMode
+                ||| ConfigChanges.ScreenLayout
+                ||| ConfigChanges.SmallestScreenSize))>]
 type MainActivity() =
     inherit FormsAppCompatActivity()
 
@@ -57,16 +58,10 @@ type MainActivity() =
 
         let dbPath = getDbPath()
 
-        let application =
-            Program.startApplicationWithArgs dbPath App.program
+        let application = Program.startApplicationWithArgs dbPath App.program
 
         this.LoadApplication(application)
 
-    override this.OnRequestPermissionsResult
-        (
-            requestCode: int,
-            permissions: string [],
-            [<GeneratedEnum>] grantResults: Permission []
-        ) =
+    override this.OnRequestPermissionsResult(requestCode: int, permissions: string[], [<GeneratedEnum>] grantResults: Permission[]) =
         Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults)
         base.OnRequestPermissionsResult(requestCode, permissions, grantResults)

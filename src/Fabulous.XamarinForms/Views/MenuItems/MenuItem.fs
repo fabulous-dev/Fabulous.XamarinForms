@@ -18,14 +18,11 @@ module MenuItem =
     let IconImageSource =
         Attributes.defineBindableAppTheme<ImageSource> MenuItem.IconImageSourceProperty
 
-    let IsDestructive =
-        Attributes.defineBindableBool MenuItem.IsDestructiveProperty
+    let IsDestructive = Attributes.defineBindableBool MenuItem.IsDestructiveProperty
 
-    let IsEnabled =
-        Attributes.defineBindableBool MenuItem.IsEnabledProperty
+    let IsEnabled = Attributes.defineBindableBool MenuItem.IsEnabledProperty
 
-    let Text =
-        Attributes.defineBindableWithEquality<string> MenuItem.TextProperty
+    let Text = Attributes.defineBindableWithEquality<string> MenuItem.TextProperty
 
     let Clicked =
         Attributes.defineEventNoArg "MenuItem_Clicked" (fun target -> (target :?> MenuItem).Clicked)
@@ -33,12 +30,9 @@ module MenuItem =
 [<AutoOpen>]
 module MenuItemBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline MenuItem<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IMenuItem>(
-                MenuItem.WidgetKey,
-                MenuItem.Text.WithValue(text),
-                MenuItem.Clicked.WithValue(onClicked)
-            )
+            WidgetBuilder<'msg, IMenuItem>(MenuItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
 
 [<Extension>]
 type MenuItemModifiers =

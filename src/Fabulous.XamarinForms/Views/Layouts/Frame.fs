@@ -10,22 +10,18 @@ type IFrame =
 module Frame =
     let WidgetKey = Widgets.register<Frame>()
 
-    let BorderColor =
-        Attributes.defineBindableAppThemeColor Frame.BorderColorProperty
+    let BorderColor = Attributes.defineBindableAppThemeColor Frame.BorderColorProperty
 
-    let CornerRadius =
-        Attributes.defineBindableFloat Frame.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableFloat Frame.CornerRadiusProperty
 
-    let HasShadow =
-        Attributes.defineBindableBool Frame.HasShadowProperty
+    let HasShadow = Attributes.defineBindableBool Frame.HasShadowProperty
 
 [<AutoOpen>]
 module FrameBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline Frame<'msg, 'marker when 'marker :> IView>(content: WidgetBuilder<'msg, 'marker>) =
-            WidgetHelpers.buildWidgets<'msg, IFrame>
-                Frame.WidgetKey
-                [| ContentView.Content.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFrame> Frame.WidgetKey [| ContentView.Content.WithValue(content.Compile()) |]
 
 [<Extension>]
 type FrameModifiers =

@@ -13,39 +13,31 @@ type IMap =
     inherit IView
 
 module Pin =
-    let PinType =
-        Attributes.defineBindableWithEquality<PinType> Pin.TypeProperty
+    let PinType = Attributes.defineBindableWithEquality<PinType> Pin.TypeProperty
 
-    let Label =
-        Attributes.defineBindableWithEquality<string> Pin.LabelProperty
+    let Label = Attributes.defineBindableWithEquality<string> Pin.LabelProperty
 
-    let Position =
-        Attributes.defineBindableWithEquality<Position> Pin.PositionProperty
+    let Position = Attributes.defineBindableWithEquality<Position> Pin.PositionProperty
 
-    let Address =
-        Attributes.defineBindableWithEquality<string> Pin.AddressProperty
+    let Address = Attributes.defineBindableWithEquality<string> Pin.AddressProperty
 
     let PinKey = Widgets.register<Pin>()
 
 module Map =
     let RequestedRegion =
-        Attributes.defineSimpleScalarWithEquality<MapSpan>
-            "Map_RequestedRegion"
-            (fun _ newValueOpt node ->
-                let map = node.Target :?> Map
+        Attributes.defineSimpleScalarWithEquality<MapSpan> "Map_RequestedRegion" (fun _ newValueOpt node ->
+            let map = node.Target :?> Map
 
-                match newValueOpt with
-                | ValueNone -> ()
-                | ValueSome mapSpan -> map.MoveToRegion(mapSpan))
+            match newValueOpt with
+            | ValueNone -> ()
+            | ValueSome mapSpan -> map.MoveToRegion(mapSpan))
 
     let Pins =
         Attributes.defineListWidgetCollection "Map_Pins" (fun target -> (target :?> Map).Pins)
 
-    let HasZoomEnabled =
-        Attributes.defineBindableBool Map.HasZoomEnabledProperty
+    let HasZoomEnabled = Attributes.defineBindableBool Map.HasZoomEnabledProperty
 
-    let HasScrollEnabled =
-        Attributes.defineBindableBool Map.HasScrollEnabledProperty
+    let HasScrollEnabled = Attributes.defineBindableBool Map.HasScrollEnabledProperty
 
     let MapKey = Widgets.register<Map>()
 
@@ -53,13 +45,9 @@ module Map =
 module MapBuilders =
 
     type Fabulous.XamarinForms.View with
+
         static member inline Pin<'msg>(pinType, label, position) =
-            WidgetBuilder<'msg, IPin>(
-                Pin.PinKey,
-                Pin.PinType.WithValue(pinType),
-                Pin.Label.WithValue(label),
-                Pin.Position.WithValue(position)
-            )
+            WidgetBuilder<'msg, IPin>(Pin.PinKey, Pin.PinType.WithValue(pinType), Pin.Label.WithValue(label), Pin.Position.WithValue(position))
 
         static member inline Map<'msg>(requestedRegion) =
             CollectionBuilder<'msg, IMap, IPin>(Map.MapKey, Map.Pins, Map.RequestedRegion.WithValue(requestedRegion))

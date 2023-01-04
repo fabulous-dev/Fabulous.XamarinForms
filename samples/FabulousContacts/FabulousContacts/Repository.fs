@@ -40,13 +40,9 @@ module Repository =
 
     let connect dbPath =
         async {
-            let db =
-                SQLiteAsyncConnection(SQLiteConnectionString dbPath)
+            let db = SQLiteAsyncConnection(SQLiteConnectionString dbPath)
 
-            do!
-                db.CreateTableAsync<ContactObject>()
-                |> Async.AwaitTask
-                |> Async.Ignore
+            do! db.CreateTableAsync<ContactObject>() |> Async.AwaitTask |> Async.Ignore
 
             return db
         }
@@ -55,12 +51,9 @@ module Repository =
         async {
             let! database = connect dbPath
 
-            let! objs =
-                database.Table<ContactObject>().ToListAsync()
-                |> Async.AwaitTask
+            let! objs = database.Table<ContactObject>().ToListAsync() |> Async.AwaitTask
 
-            let results =
-                objs |> Seq.toList |> List.map convertToModel
+            let results = objs |> Seq.toList |> List.map convertToModel
 
             do! database.CloseAsync() |> Async.AwaitTask
 
@@ -72,10 +65,7 @@ module Repository =
             let! database = connect dbPath
             let obj = convertToObject contact
 
-            do!
-                database.InsertAsync(obj)
-                |> Async.AwaitTask
-                |> Async.Ignore
+            do! database.InsertAsync(obj) |> Async.AwaitTask |> Async.Ignore
 
             let! rowIdObj =
                 database.ExecuteScalarAsync("select last_insert_rowid()", [||])
@@ -93,10 +83,7 @@ module Repository =
             let! database = connect dbPath
             let obj = convertToObject contact
 
-            do!
-                database.UpdateAsync(obj)
-                |> Async.AwaitTask
-                |> Async.Ignore
+            do! database.UpdateAsync(obj) |> Async.AwaitTask |> Async.Ignore
 
             do! database.CloseAsync() |> Async.AwaitTask
 
@@ -108,10 +95,7 @@ module Repository =
             let! database = connect dbPath
             let obj = convertToObject contact
 
-            do!
-                database.DeleteAsync(obj)
-                |> Async.AwaitTask
-                |> Async.Ignore
+            do! database.DeleteAsync(obj) |> Async.AwaitTask |> Async.Ignore
 
             do! database.CloseAsync() |> Async.AwaitTask
         }

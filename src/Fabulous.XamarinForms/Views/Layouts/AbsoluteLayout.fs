@@ -20,6 +20,7 @@ module AbsoluteLayout =
 [<AutoOpen>]
 module AbsoluteLayoutBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline AbsoluteLayout<'msg>() =
             CollectionBuilder<'msg, IAbsoluteLayout, IView>(AbsoluteLayout.WidgetKey, LayoutOfView.Children)
 
@@ -38,14 +39,7 @@ type AbsoluteLayoutAttachedModifiers =
     /// <param name= "width">The width of the bounding rectangle.</param>
     /// <param name= "height">The height of the bounding rectangle.</param>
     [<Extension>]
-    static member inline layoutBounds
-        (
-            this: WidgetBuilder<'msg, #IView>,
-            x: float,
-            y: float,
-            width: float,
-            height: float
-        ) =
+    static member inline layoutBounds(this: WidgetBuilder<'msg, #IView>, x: float, y: float, width: float, height: float) =
         this.AddScalar(AbsoluteLayout.LayoutBounds.WithValue(Rectangle(x, y, width, height)))
 
     /// <summary>Determines how the values in the list are interpreted to create the bounding rectangle.</summary>

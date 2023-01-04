@@ -29,12 +29,11 @@ module App =
                         .centerTextHorizontal()
 
                     (VStack() {
-                        Label($"Count is {model.Count}")
-                            .centerTextHorizontal()
+                        Label($"Count is {model.Count}").centerTextHorizontal()
 
                         Button("Increment", Increment)
                         Button("Decrement", Decrement)
-                     })
+                    })
                         .centerVertical(expand = true)
                 }
             )

@@ -37,12 +37,7 @@ module DetailPage =
                 PhoneDialer.Open(phoneNumber)
             with
             | :? FeatureNotSupportedException ->
-                do!
-                    displayAlert(
-                        Strings.DetailPage_DialNumberFailed,
-                        Strings.DetailPage_CapabilityNotSupported "Phone Dialer",
-                        Strings.Common_OK
-                    )
+                do! displayAlert(Strings.DetailPage_DialNumberFailed, Strings.DetailPage_CapabilityNotSupported "Phone Dialer", Strings.Common_OK)
             | _ -> do! displayAlert(Strings.DetailPage_DialNumberFailed, Strings.Common_Error, Strings.Common_OK)
         }
         |> Async.executeOnMainThread
@@ -55,12 +50,7 @@ module DetailPage =
                 do! Sms.ComposeAsync(message) |> Async.AwaitTask
             with
             | :? FeatureNotSupportedException ->
-                do!
-                    displayAlert(
-                        Strings.DetailPage_ComposeSmsFailed,
-                        Strings.DetailPage_CapabilityNotSupported "SMS",
-                        Strings.Common_OK
-                    )
+                do! displayAlert(Strings.DetailPage_ComposeSmsFailed, Strings.DetailPage_CapabilityNotSupported "SMS", Strings.Common_OK)
             | _ -> do! displayAlert(Strings.DetailPage_ComposeSmsFailed, Strings.Common_Error, Strings.Common_OK)
         }
         |> Async.executeOnMainThread
@@ -73,12 +63,7 @@ module DetailPage =
                 do! Email.ComposeAsync(message) |> Async.AwaitTask
             with
             | :? FeatureNotSupportedException ->
-                do!
-                    displayAlert(
-                        Strings.DetailPage_ComposeEmailFailed,
-                        Strings.DetailPage_CapabilityNotSupported "Email",
-                        Strings.Common_OK
-                    )
+                do! displayAlert(Strings.DetailPage_ComposeEmailFailed, Strings.DetailPage_CapabilityNotSupported "Email", Strings.Common_OK)
             | _ -> do! displayAlert(Strings.DetailPage_ComposeEmailFailed, Strings.Common_Error, Strings.Common_OK)
         }
         |> Async.executeOnMainThread
@@ -117,7 +102,7 @@ module DetailPage =
                         .size(height = 35., width = 35.)
                         .alignStartHorizontal()
                         .alignStartVertical()
-                 })
+                })
                     .size(height = 125., width = 125.)
                     .background(Color.White.ToFabColor())
                     .centerHorizontal()
@@ -129,14 +114,14 @@ module DetailPage =
 
                     if hasSetField contact.Email then
                         detailActionButton "email.png" EmailTapped
-                 })
+                })
                     .centerHorizontal()
                     .margin(0., 10., 0., 10.)
-             })
+            })
                 .background(FabColor.fromHex "#448cb8")
                 .padding(20., 10., 20., 10.)
-        with
-        | ex -> raise ex
+        with ex ->
+            raise ex
 
     let body contact =
         (VStack(spacing = 10.) {
@@ -146,7 +131,7 @@ module DetailPage =
             optionalLabel contact.Phone
             detailFieldTitle "Address"
             optionalLabel contact.Address
-         })
+        })
             .padding(20., 10., 20., 20.)
 
     let view model =

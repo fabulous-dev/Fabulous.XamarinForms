@@ -9,8 +9,7 @@ type IPancakeView =
     inherit IView
 
 module PancakeView =
-    let WidgetKey =
-        Widgets.register<Xamarin.Forms.PancakeView.PancakeView>()
+    let WidgetKey = Widgets.register<Xamarin.Forms.PancakeView.PancakeView>()
 
     let BackgroundGradientStops =
         Attributes.defineBindableWithEquality<Xamarin.Forms.PancakeView.GradientStopCollection>
@@ -22,11 +21,8 @@ module PancakeView =
 [<AutoOpen>]
 module PancakeViewBuilders =
     type Fabulous.XamarinForms.View with
-        static member inline PancakeView<'msg, 'marker when 'marker :> IView>
-            (
-                backgroundGradientStops,
-                content: WidgetBuilder<'msg, 'marker>
-            ) =
+
+        static member inline PancakeView<'msg, 'marker when 'marker :> IView>(backgroundGradientStops, content: WidgetBuilder<'msg, 'marker>) =
             WidgetBuilder<'msg, IPancakeView>(
                 PancakeView.WidgetKey,
                 AttributesBundle(

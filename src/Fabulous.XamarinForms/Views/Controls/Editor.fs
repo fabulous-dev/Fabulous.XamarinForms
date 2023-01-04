@@ -19,8 +19,7 @@ module Editor =
     let FontFamily =
         Attributes.defineBindableWithEquality<string> Editor.FontFamilyProperty
 
-    let FontSize =
-        Attributes.defineBindableFloat Editor.FontSizeProperty
+    let FontSize = Attributes.defineBindableFloat Editor.FontSizeProperty
 
     let IsTextPredictionEnabled =
         Attributes.defineBindableBool Editor.IsTextPredictionEnabledProperty
@@ -31,25 +30,17 @@ module Editor =
 [<AutoOpen>]
 module EditorBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline Editor<'msg>(text: string, onTextChanged: string -> 'msg) =
             WidgetBuilder<'msg, IEditor>(
                 Editor.WidgetKey,
-                InputView.TextWithEvent.WithValue(
-                    ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box)
-                )
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
             )
 
 [<Extension>]
 type EditorModifiers =
     [<Extension>]
-    static member inline font
-        (
-            this: WidgetBuilder<'msg, #IEditor>,
-            ?size: float,
-            ?namedSize: NamedSize,
-            ?attributes: FontAttributes,
-            ?fontFamily: string
-        ) =
+    static member inline font(this: WidgetBuilder<'msg, #IEditor>, ?size: float, ?namedSize: NamedSize, ?attributes: FontAttributes, ?fontFamily: string) =
 
         let mutable res = this
 

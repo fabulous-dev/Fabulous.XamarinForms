@@ -48,7 +48,7 @@ You can start your new Fabulous.XamarinForms app in a matter of seconds using th
 For a starter guide see our [documentation](https://docs.fabulous.dev/v2/xamarin.forms/getting-started).
 
 ```sh
-dotnet new -i Fabulous.XamarinForms.Templates
+dotnet new install Fabulous.XamarinForms.Templates
 dotnet new fabulous-xf -n MyApp
 ```
 

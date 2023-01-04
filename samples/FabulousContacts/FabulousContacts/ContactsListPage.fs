@@ -60,7 +60,9 @@ module ContactsListPage =
             i <- i - 1
 
             for contact in group do
-                if i = 0 then foundContact <- contact
+                if i = 0 then
+                    foundContact <- contact
+
                 i <- i - 1
 
         foundContact
@@ -84,8 +86,8 @@ module ContactsListPage =
 
             let m =
                 { model with
-                      FilterText = filterText
-                      ContactGroups = contactGroups }
+                    FilterText = filterText
+                    ContactGroups = contactGroups }
 
             m, Cmd.none, ExternalMsg.NoOp
 
@@ -94,8 +96,8 @@ module ContactsListPage =
 
             let m =
                 { model with
-                      Contacts = contacts
-                      ContactGroups = contactGroups }
+                    Contacts = contacts
+                    ContactGroups = contactGroups }
 
             m, Cmd.none, ExternalMsg.NoOp
 
@@ -113,40 +115,33 @@ module ContactsListPage =
                     .background(accentColor)
                     .cancelButtonColor(accentTextColor)
 
-                (ListView
-                    (model.Contacts)
-                    (fun contact ->
-                        cellView
-                            contact.Picture
-                            $"{contact.FirstName} {contact.LastName}"
-                            contact.Address
-                            contact.IsFavorite))
+                (ListView (model.Contacts) (fun contact -> cellView contact.Picture $"{contact.FirstName} {contact.LastName}" contact.Address contact.IsFavorite))
                     .rowHeight(60)
                     .selectionMode(ListViewSelectionMode.None)
                     .onItemTapped(ContactSelected)
                     .fillVertical(expand = true)
 
-             // TODO: For some reason, the GroupedListView triggers a native crash on Android but works perfectly on iOS.
-             // GroupedListView
-             //     model.ContactGroups
-             //     (fun group ->
-             //         TextCell("Hello")
-             //         // groupView group.Name
-             //     )
-             //     (fun contact ->
-             //         TextCell("Hello")
-             //         // cellView
-             //         //     contact.Picture
-             //         //     $"{contact.FirstName} {contact.LastName}"
-             //         //     contact.Address
-             //         //     contact.IsFavorite
-             //     )
-             //
-             //     // .rowHeight(60)
-             //     // .selectionMode(ListViewSelectionMode.None)
-             //     // .onItemTapped(ContactSelected)
-             //     // .fillVertical(expand = true)
-             })
+            // TODO: For some reason, the GroupedListView triggers a native crash on Android but works perfectly on iOS.
+            // GroupedListView
+            //     model.ContactGroups
+            //     (fun group ->
+            //         TextCell("Hello")
+            //         // groupView group.Name
+            //     )
+            //     (fun contact ->
+            //         TextCell("Hello")
+            //         // cellView
+            //         //     contact.Picture
+            //         //     $"{contact.FirstName} {contact.LastName}"
+            //         //     contact.Address
+            //         //     contact.IsFavorite
+            //     )
+            //
+            //     // .rowHeight(60)
+            //     // .selectionMode(ListViewSelectionMode.None)
+            //     // .onItemTapped(ContactSelected)
+            //     // .fillVertical(expand = true)
+            })
         )
             .toolbarItems() {
             ToolbarItem(Strings.Common_About, AboutTapped)

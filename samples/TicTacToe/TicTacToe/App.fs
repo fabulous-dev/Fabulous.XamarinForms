@@ -10,6 +10,7 @@ open type Fabulous.XamarinForms.View
 type Player =
     | X
     | O
+
     member p.Swap =
         match p with
         | X -> O
@@ -24,6 +25,7 @@ type Player =
 type GameCell =
     | Empty
     | Full of Player
+
     member x.CanPlay = (x = Empty)
 
 /// Represents the result of a game
@@ -50,30 +52,30 @@ type Row = GameCell list
 /// Represents the state of the game
 type Model =
     {
-      /// Who is next to play
-      NextUp: Player
+        /// Who is next to play
+        NextUp: Player
 
-      /// The state of play on the board
-      Board: Board
+        /// The state of play on the board
+        Board: Board
 
-      /// The state of play on the board
-      GameScore: int * int
+        /// The state of play on the board
+        GameScore: int * int
 
-      /// The model occasionally includes things related to the view.  In this case,
-      /// we track the desired visual size of the board, to ensure a square, in response to
-      /// updates telling us the overall allocated size.
-      VisualBoardSize: double option }
+        /// The model occasionally includes things related to the view.  In this case,
+        /// we track the desired visual size of the board, to ensure a square, in response to
+        /// updates telling us the overall allocated size.
+        VisualBoardSize: double option
+    }
 
 /// The model, update and view content of the app. This is placed in an
 /// independent model to facilitate unit testing.
 module App =
     let positions =
-        [ for x in 0 .. 2 do
-              for y in 0 .. 2 do
+        [ for x in 0..2 do
+              for y in 0..2 do
                   yield (x, y) ]
 
-    let initialBoard =
-        Map.ofList [ for p in positions -> p, Empty ]
+    let initialBoard = Map.ofList [ for p in positions -> p, Empty ]
 
     let init () =
         { NextUp = X
@@ -88,10 +90,10 @@ module App =
     let lines =
         [
           // rows
-          for row in 0 .. 2 do
+          for row in 0..2 do
               yield [ (row, 0); (row, 1); (row, 2) ]
           // columns
-          for col in 0 .. 2 do
+          for col in 0..2 do
               yield [ (0, col); (1, col); (2, col) ]
           // diagonals
           yield [ (0, 0); (1, 1); (2, 2) ]
@@ -102,33 +104,28 @@ module App =
 
     /// Determine if a line is a winning line.
     let getLineWinner line =
-        if line
-           |> List.forall
-               (function
-               | Full X -> true
-               | _ -> false) then
+        if
+            line
+            |> List.forall (function
+                | Full X -> true
+                | _ -> false)
+        then
             Some X
-        elif line
-             |> List.forall
-                 (function
-                 | Full O -> true
-                 | _ -> false) then
+        elif
+            line
+            |> List.forall (function
+                | Full O -> true
+                | _ -> false)
+        then
             Some O
         else
             None
 
     /// Determine the game result, if any.
     let getGameResult model =
-        match
-            lines
-            |> Seq.tryPick(getLine model.Board >> getLineWinner)
-            with
+        match lines |> Seq.tryPick(getLine model.Board >> getLineWinner) with
         | Some p -> Win p
-        | _ ->
-            if anyMoreMoves model then
-                StillPlaying
-            else
-                Draw
+        | _ -> if anyMoreMoves model then StillPlaying else Draw
 
     /// Get a message to show the current game result
     let getMessage model =
@@ -143,8 +140,8 @@ module App =
         | Play pos ->
             let newModel =
                 { model with
-                      Board = model.Board.Add(pos, Full model.NextUp)
-                      NextUp = model.NextUp.Swap }
+                    Board = model.Board.Add(pos, Full model.NextUp)
+                    NextUp = model.NextUp.Swap }
 
             // Make an announcement in the middle of the game.
             let result = getGameResult newModel
@@ -156,23 +153,20 @@ module App =
                 let x, y = newModel.GameScore
 
                 match result with
-                | Win p ->
-                    { newModel with
-                          GameScore = (if p = X then (x + 1, y) else (x, y + 1)) }
+                | Win p -> { newModel with GameScore = (if p = X then (x + 1, y) else (x, y + 1)) }
                 | _ -> newModel
 
             // Return the new model.
             newModel2
         | Restart ->
             { model with
-                  NextUp = X
-                  Board = initialBoard
-                  GameScore = (0, 0) }
+                NextUp = X
+                Board = initialBoard
+                GameScore = (0, 0) }
         | VisualBoardSizeChanged args ->
             let size = min args.Width args.Height - 80.
 
-            { model with
-                  VisualBoardSize = Some size }
+            { model with VisualBoardSize = Some size }
 
     /// A helper used in the 'view' function to get the name
     /// of the Xaml resource for the image for a player
@@ -194,8 +188,7 @@ module App =
     /// A condition used in the 'view' function to check if we can play in a cell.
     /// The visual contents of a cell depends on this condition.
     let canPlay model cell =
-        (cell = Empty)
-        && (getGameResult model = StillPlaying)
+        (cell = Empty) && (getGameResult model = StillPlaying)
 
     module private Colors =
         let black = Color.Black.ToFabColor()
@@ -209,16 +202,7 @@ module App =
                     ContentPage(
                         "TicTacToe",
                         Grid(coldefs = [ Star ], rowdefs = [ Star; Auto; Auto ]) {
-                            (Grid(coldefs = [ Star
-                                              Absolute 5.0
-                                              Star
-                                              Absolute 5.0
-                                              Star ],
-                                  rowdefs = [ Star
-                                              Absolute 5.0
-                                              Star
-                                              Absolute 5.0
-                                              Star ]) {
+                            (Grid(coldefs = [ Star; Absolute 5.0; Star; Absolute 5.0; Star ], rowdefs = [ Star; Absolute 5.0; Star; Absolute 5.0; Star ]) {
                                 BoxView(Colors.black).gridRow(1).gridColumnSpan(5)
                                 BoxView(Colors.black).gridRow(3).gridColumnSpan(5)
                                 BoxView(Colors.black).gridColumn(1).gridRowSpan(5)
@@ -236,7 +220,7 @@ module App =
                                             .margin(10.)
                                             .gridRow(row * 2)
                                             .gridColumn(col * 2)
-                             })
+                            })
                                 .rowSpacing(0.)
                                 .columnSpacing(0.)
                                 .center()
@@ -261,7 +245,7 @@ module App =
                 match model.VisualBoardSize with
                 | None -> contentPage.onSizeAllocated(VisualBoardSizeChanged)
                 | Some _ -> contentPage
-             })
+            })
                 .barBackgroundColor(Colors.lightBlue)
                 .barTextColor(Colors.black)
         )
@@ -271,10 +255,6 @@ module App =
     // this dependency out to allow unit testing of the 'update' function.
 
     let gameOver msg =
-        Application.Current.Dispatcher.BeginInvokeOnMainThread
-            (fun () ->
-                Application.Current.MainPage.DisplayAlert("Game over", msg, "OK")
-                |> ignore)
+        Application.Current.Dispatcher.BeginInvokeOnMainThread(fun () -> Application.Current.MainPage.DisplayAlert("Game over", msg, "OK") |> ignore)
 
-    let program =
-        Program.stateful init (update gameOver) view
+    let program = Program.stateful init (update gameOver) view

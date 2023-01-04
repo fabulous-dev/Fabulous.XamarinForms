@@ -15,5 +15,6 @@ module FabulousUnderlinedLabel =
         inherit ILabel
 
     type Fabulous.XamarinForms.View with
+
         static member inline UnderlinedLabel<'msg>(text) =
             WidgetBuilder<'msg, IUnderlinedLabel>(UnderlinedLabelKey, Label.Text.WithValue(text))

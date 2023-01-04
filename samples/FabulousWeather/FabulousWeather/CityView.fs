@@ -27,9 +27,7 @@ module CityView =
                 .centerTextHorizontal()
                 .padding(0., 20., 0., 0.)
 
-            ActivityIndicator(true)
-                .centerHorizontal()
-                .centerVertical(expand = true)
+            ActivityIndicator(true).centerHorizontal().centerVertical(expand = true)
         }
 
     let loadedView (index, cityName: string, isRefreshing, data) onRefreshing =
@@ -40,12 +38,9 @@ module CityView =
             onRefreshing,
             ScrollView(
                 VStack() {
-                    Label(cityName.ToUpper())
-                        .font(Styles.CityNameFontSize)
-                        .centerTextHorizontal()
+                    Label(cityName.ToUpper()).font(Styles.CityNameFontSize).centerTextHorizontal()
 
-                    Image(Aspect.AspectFit, $"{sanitizedCityName}.png")
-                        .opacity(0.8)
+                    Image(Aspect.AspectFit, $"{sanitizedCityName}.png").opacity(0.8)
 
                     Label($"{Helpers.kelvinToRoundedFahrenheit data.Temperature}°")
                         .font(Styles.CurrentTemperatureFontSize)
@@ -57,12 +52,7 @@ module CityView =
                         .centerTextHorizontal()
                         .margin(Thickness(0., 10., 0., 0.))
 
-                    Label(
-                        data
-                            .Date
-                            .ToString("dddd, MMMM dd, yyyy, h:mm tt")
-                            .ToUpper()
-                    )
+                    Label(data.Date.ToString("dddd, MMMM dd, yyyy, h:mm tt").ToUpper())
                         .font(Styles.CurrentDateFontSize)
                         .centerTextHorizontal()
 
@@ -72,13 +62,9 @@ module CityView =
                                 PancakeView(
                                     Styles.HourlyForecastGradientStops,
                                     VStack() {
-                                        Label(forecast.Date.ToString("h tt").ToLower())
-                                            .centerTextHorizontal()
+                                        Label(forecast.Date.ToString("h tt").ToLower()).centerTextHorizontal()
 
-                                        Image(
-                                            Aspect.AspectFit,
-                                            Uri($"http://openweathermap.org/img/wn/{forecast.IconName}@2x.png")
-                                        )
+                                        Image(Aspect.AspectFit, Uri($"http://openweathermap.org/img/wn/{forecast.IconName}@2x.png"))
                                             .centerHorizontal()
                                             .centerVertical(expand = true)
 
@@ -88,7 +74,7 @@ module CityView =
                                 )
                             )
                                 .background(Styles.HourlyForecastStartColor)
-                     })
+                    })
                         .centerHorizontal()
                         .margin(0., 30., 0., 0.)
                 }
@@ -104,8 +90,6 @@ module CityView =
 
         match city.Data with
         | Some data ->
-            ContentView(loadedView(index, city.Name, city.IsRefreshing, data) onRefreshing)
+            ContentView(loadedView (index, city.Name, city.IsRefreshing, data) onRefreshing)
                 .padding(padding)
-        | None ->
-            ContentView(loadingView city.Name)
-                .padding(padding)
+        | None -> ContentView(loadingView city.Name).padding(padding)

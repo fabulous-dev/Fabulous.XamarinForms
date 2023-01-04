@@ -11,9 +11,7 @@ module TapGestureRecognizer =
     let WidgetKey = Widgets.register<TapGestureRecognizer>()
 
     let Tapped =
-        Attributes.defineEventNoArg
-            "TapGestureRecognizer_Tapped"
-            (fun target -> (target :?> TapGestureRecognizer).Tapped)
+        Attributes.defineEventNoArg "TapGestureRecognizer_Tapped" (fun target -> (target :?> TapGestureRecognizer).Tapped)
 
     let NumberOfTapsRequired =
         Attributes.defineBindableInt TapGestureRecognizer.NumberOfTapsRequiredProperty
@@ -21,11 +19,9 @@ module TapGestureRecognizer =
 [<AutoOpen>]
 module TapGestureRecognizerBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline TapGestureRecognizer<'msg>(onTapped: 'msg) =
-            WidgetBuilder<'msg, ITapGestureRecognizer>(
-                TapGestureRecognizer.WidgetKey,
-                TapGestureRecognizer.Tapped.WithValue(onTapped)
-            )
+            WidgetBuilder<'msg, ITapGestureRecognizer>(TapGestureRecognizer.WidgetKey, TapGestureRecognizer.Tapped.WithValue(onTapped))
 
 [<Extension>]
 type TapGestureRecognizerModifiers =

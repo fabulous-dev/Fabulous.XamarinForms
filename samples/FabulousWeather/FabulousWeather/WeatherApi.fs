@@ -9,11 +9,9 @@ module WeatherApi =
 
     let baseEndpoint = "http://api.openweathermap.org/data/2.5"
 
-    let currentWeatherEndpoint =
-        $"%s{baseEndpoint}/weather?appid=%s{apiKey}"
+    let currentWeatherEndpoint = $"%s{baseEndpoint}/weather?appid=%s{apiKey}"
 
-    let hourlyForecastEndpoint =
-        $"%s{baseEndpoint}/forecast?appid=%s{apiKey}"
+    let hourlyForecastEndpoint = $"%s{baseEndpoint}/forecast?appid=%s{apiKey}"
 
     type CurrentWeatherApi = JsonProvider<"WeatherSamples/current-weather.json">
     type HourlyForecastApi = JsonProvider<"WeatherSamples/hourly-forecast.json">
@@ -74,12 +72,8 @@ module WeatherApi =
             let! currentWeather = CurrentWeatherApi.AsyncLoad $"%s{currentWeatherEndpoint}&q=%s{name}"
 
             return
-                { Date =
-                      currentWeather.Dt
-                      |> Helpers.unixTimestampToDateTime
-                  WeatherKind =
-                      currentWeather.Weather.[0].Main
-                      |> WeatherKind.Parse
+                { Date = currentWeather.Dt |> Helpers.unixTimestampToDateTime
+                  WeatherKind = currentWeather.Weather.[0].Main |> WeatherKind.Parse
                   Temperature = (int currentWeather.Main.Temp) * 1<kelvin> }
         }
 
@@ -89,13 +83,12 @@ module WeatherApi =
 
             return
                 { Values =
-                      hourlyForecast.List
-                      |> Array.toList
-                      |> List.take 5
-                      |> List.map
-                          (fun v ->
-                              { Date = v.Dt |> Helpers.unixTimestampToDateTime
-                                Temperature = (int v.Main.Temp) * 1<kelvin>
-                                WeatherKind = v.Weather.[0].Main |> WeatherKind.Parse
-                                IconName = v.Weather.[0].Icon }) }
+                    hourlyForecast.List
+                    |> Array.toList
+                    |> List.take 5
+                    |> List.map(fun v ->
+                        { Date = v.Dt |> Helpers.unixTimestampToDateTime
+                          Temperature = (int v.Main.Temp) * 1<kelvin>
+                          WeatherKind = v.Weather.[0].Main |> WeatherKind.Parse
+                          IconName = v.Weather.[0].Icon }) }
         }

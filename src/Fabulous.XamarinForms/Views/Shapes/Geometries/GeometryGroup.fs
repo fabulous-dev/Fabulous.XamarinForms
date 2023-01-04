@@ -12,9 +12,7 @@ module GeometryGroup =
     let WidgetKey = Widgets.register<GeometryGroup>()
 
     let Children =
-        Attributes.defineListWidgetCollection
-            "GeometryGroup_Children"
-            (fun target -> (target :?> GeometryGroup).Children :> IList<_>)
+        Attributes.defineListWidgetCollection "GeometryGroup_Children" (fun target -> (target :?> GeometryGroup).Children :> IList<_>)
 
     let FillRule =
         Attributes.defineBindableEnum<FillRule> GeometryGroup.FillRuleProperty
@@ -22,13 +20,9 @@ module GeometryGroup =
 [<AutoOpen>]
 module GeometryGroupBuilders =
     type Fabulous.XamarinForms.View with
+
         static member inline GeometryGroup<'msg>(?fillRule: FillRule) =
             match fillRule with
-            | None ->
-                CollectionBuilder<'msg, IGeometryGroup, IGeometry>(GeometryGroup.WidgetKey, GeometryGroup.Children)
+            | None -> CollectionBuilder<'msg, IGeometryGroup, IGeometry>(GeometryGroup.WidgetKey, GeometryGroup.Children)
             | Some fillRule ->
-                CollectionBuilder<'msg, IGeometryGroup, IGeometry>(
-                    GeometryGroup.WidgetKey,
-                    GeometryGroup.Children,
-                    GeometryGroup.FillRule.WithValue(fillRule)
-                )
+                CollectionBuilder<'msg, IGeometryGroup, IGeometry>(GeometryGroup.WidgetKey, GeometryGroup.Children, GeometryGroup.FillRule.WithValue(fillRule))

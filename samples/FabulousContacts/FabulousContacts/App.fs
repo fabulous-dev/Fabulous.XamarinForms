@@ -75,39 +75,30 @@ module App =
             let m, cmd, externalMsg = MainPage.update msg model.MainPageModel
             let cmd2 = handleMainExternalMsg externalMsg
 
-            let batchCmd =
-                Cmd.batch [ (Cmd.map MainPageMsg cmd)
-                            cmd2 ]
+            let batchCmd = Cmd.batch [ (Cmd.map MainPageMsg cmd); cmd2 ]
 
             { model with MainPageModel = m }, batchCmd
 
         | DetailPageMsg msg ->
-            let m, cmd, externalMsg =
-                DetailPage.update msg model.DetailPageModel.Value
+            let m, cmd, externalMsg = DetailPage.update msg model.DetailPageModel.Value
 
             let cmd2 = handleDetailPageExternalMsg externalMsg
 
-            let batchCmd =
-                Cmd.batch [ (Cmd.map DetailPageMsg cmd)
-                            cmd2 ]
+            let batchCmd = Cmd.batch [ (Cmd.map DetailPageMsg cmd); cmd2 ]
 
             { model with DetailPageModel = Some m }, batchCmd
 
         | EditPageMsg msg ->
-            let m, cmd, externalMsg =
-                EditPage.update model.DbPath msg model.EditPageModel.Value
+            let m, cmd, externalMsg = EditPage.update model.DbPath msg model.EditPageModel.Value
 
             let cmd2 = handleEditPageExternalMsg externalMsg
 
-            let batchCmd =
-                Cmd.batch [ (Cmd.map EditPageMsg cmd)
-                            cmd2 ]
+            let batchCmd = Cmd.batch [ (Cmd.map EditPageMsg cmd); cmd2 ]
 
             { model with EditPageModel = Some m }, batchCmd
 
         | AboutPageMsg msg ->
-            let m, cmd =
-                AboutPage.update msg model.AboutPageModel.Value
+            let m, cmd = AboutPage.update msg model.AboutPageModel.Value
 
             { model with AboutPageModel = Some m }, Cmd.map AboutPageMsg cmd
 
@@ -124,8 +115,7 @@ module App =
             { model with EditPageModel = Some m }, (Cmd.map EditPageMsg cmd)
 
         | UpdateWhenContactAdded contact ->
-            let mainMsg =
-                Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactAdded contact))
+            let mainMsg = Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactAdded contact))
 
             let m = { model with EditPageModel = None }
 
@@ -133,21 +123,21 @@ module App =
 
         | UpdateWhenContactUpdated contact ->
             let pendingCmds =
-                Cmd.batch [ Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactUpdated contact))
-                            Cmd.ofMsg(DetailPageMsg(DetailPage.Msg.ContactUpdated contact)) ]
+                Cmd.batch
+                    [ Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactUpdated contact))
+                      Cmd.ofMsg(DetailPageMsg(DetailPage.Msg.ContactUpdated contact)) ]
 
             let m = { model with EditPageModel = None }
 
             m, pendingCmds
 
         | UpdateWhenContactDeleted contact ->
-            let mainMsg =
-                Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactDeleted contact))
+            let mainMsg = Cmd.ofMsg(MainPageMsg(MainPage.Msg.ContactDeleted contact))
 
             let m =
                 { model with
-                      DetailPageModel = None
-                      EditPageModel = None }
+                    DetailPageModel = None
+                    EditPageModel = None }
 
             m, mainMsg
 
@@ -167,7 +157,7 @@ module App =
                 match model.EditPageModel with
                 | None -> ()
                 | Some editModel -> View.map EditPageMsg (EditPage.view editModel)
-             })
+            })
                 .barTextColor(Style.accentTextColor)
                 .barBackgroundColor(Style.accentColor)
                 .onBackNavigated(BackNavigated)

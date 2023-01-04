@@ -13,9 +13,7 @@ module SwipeItems =
     let WidgetKey = Widgets.register<SwipeItems>()
 
     let SwipeItems =
-        Attributes.defineListWidgetCollection
-            "SwipeItems_SwipeItems"
-            (fun target -> (target :?> SwipeItems) :> IList<_>)
+        Attributes.defineListWidgetCollection "SwipeItems_SwipeItems" (fun target -> (target :?> SwipeItems) :> IList<_>)
 
     let SwipeMode =
         Attributes.defineBindableEnum<SwipeMode> Xamarin.Forms.SwipeItems.ModeProperty
@@ -27,11 +25,9 @@ module SwipeItems =
 module SwipeItemsBuilders =
 
     type Fabulous.XamarinForms.View with
+
         static member inline SwipeItems<'msg>() =
-            CollectionBuilder<'msg, ISwipeItems, Fabulous.XamarinForms.ISwipeItem>(
-                SwipeItems.WidgetKey,
-                SwipeItems.SwipeItems
-            )
+            CollectionBuilder<'msg, ISwipeItems, Fabulous.XamarinForms.ISwipeItem>(SwipeItems.WidgetKey, SwipeItems.SwipeItems)
 
 [<Extension>]
 type SwipeItemsModifiers() =
@@ -40,11 +36,7 @@ type SwipeItemsModifiers() =
         this.AddScalar(SwipeItems.SwipeMode.WithValue(value))
 
     [<Extension>]
-    static member inline swipeBehaviorOnInvoked
-        (
-            this: WidgetBuilder<'msg, #ISwipeItems>,
-            value: SwipeBehaviorOnInvoked
-        ) =
+    static member inline swipeBehaviorOnInvoked(this: WidgetBuilder<'msg, #ISwipeItems>, value: SwipeBehaviorOnInvoked) =
         this.AddScalar(SwipeItems.SwipeBehaviorOnInvoked.WithValue(value))
 
     [<Extension>]

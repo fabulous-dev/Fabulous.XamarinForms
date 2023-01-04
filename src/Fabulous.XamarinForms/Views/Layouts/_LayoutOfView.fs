@@ -8,6 +8,4 @@ type ILayoutOfView =
 
 module LayoutOfView =
     let Children =
-        Attributes.defineListWidgetCollection
-            "LayoutOfWidget_Children"
-            (fun target -> (target :?> Xamarin.Forms.Layout<View>).Children)
+        Attributes.defineListWidgetCollection "LayoutOfWidget_Children" (fun target -> (target :?> Xamarin.Forms.Layout<View>).Children)
