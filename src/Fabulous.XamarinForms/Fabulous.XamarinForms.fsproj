@@ -6,7 +6,7 @@
   </PropertyGroup>
   <!-- NuGet Package -->
   <PropertyGroup>
-    <Description>Xamarin.Forms implementation for Fabulous - declarative UI with F# and MVU</Description>
+    <Description>Declarative UIs for Xamarin.Forms with F# and MVU, using Fabulous</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
