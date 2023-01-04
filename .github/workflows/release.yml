@@ -30,7 +30,7 @@ jobs:
       uses: mindsers/changelog-reader-action@v2
       with:
         validation_level: warn
-        version: ${RELEASE_VERSION}
+        version: '${{ env.RELEASE_VERSION }}'
         path: ./CHANGELOG.md
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
