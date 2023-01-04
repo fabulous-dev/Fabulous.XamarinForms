@@ -65,10 +65,6 @@ Documentation can be found at https://docs.fabulous.dev/v2/xamarin.forms
 
 Donating is a fantastic way to support all the efforts going into making Fabulous the best declarative UI framework for dotnet.
 
-You can support us on GitHub Sponsors:
-- Maintainer: [Timothé Larivière (@TimLariviere)](https://github.com/sponsors/TimLariviere)
-- Maintainer: [Edgar Gonzalez (@edgarfgp)](https://github.com/sponsors/edgarfgp)
-
 If you need support see Commercial Support section below.
 
 ### Commercial support
