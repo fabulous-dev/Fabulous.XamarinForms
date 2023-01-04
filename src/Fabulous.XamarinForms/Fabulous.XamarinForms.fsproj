@@ -8,7 +8,6 @@
   <PropertyGroup>
     <Description>Xamarin.Forms implementation for Fabulous - declarative UI with F# and MVU</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DebugType>embedded</DebugType>
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
   <!-- SourceLink -->
