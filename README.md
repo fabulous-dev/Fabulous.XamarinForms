@@ -76,4 +76,4 @@ If you would like us to provide you with:
 - support services,
 - and consulting services.
 
-Feel free to contact us on Twitter: [@Tim_Lariviere](https://twitter.com/Tim_Lariviere), [@efgpdev](https://twitter.com/efgpdev)
+Feel free to contact us: [support@fabulous.dev](mailto:support@fabulous.dev)
