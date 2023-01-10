@@ -42,7 +42,7 @@ let view model =
 
 To learn more about Fabulous, visit https://fabulous.dev.
 
-### Getting Started
+## Getting Started
 
 You can start your new Fabulous.XamarinForms app in a matter of seconds using the dotnet CLI templates.  
 For a starter guide see our [documentation](https://docs.fabulous.dev/v2/xamarin.forms/getting-started).
@@ -57,18 +57,18 @@ If you are developing with Visual Studio on Windows, use the `fabulous-xf-vswin`
 dotnet new fabulous-xf-vswin -n MyApp
 ```
 
-### Documentation
+## Documentation
 
 Documentation can be found at https://docs.fabulous.dev/v2/xamarin.forms
 
-### Sponsor Fabulous
+## Sponsor Fabulous
 
 Donating is a fantastic way to support all the efforts going into making Fabulous the best declarative UI framework for dotnet.  
 We accept donations through the GitHub Sponsors program.
 
 If you need support see Commercial Support section below.
 
-### Commercial support
+## Commercial support
 
 If you would like us to provide you with:
 
