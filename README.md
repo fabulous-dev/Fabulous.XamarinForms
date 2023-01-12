@@ -40,12 +40,10 @@ let view model =
     )
 ```
 
-To learn more about Fabulous, visit https://fabulous.dev.
-
 ## Getting Started
 
 You can start your new Fabulous.XamarinForms app in a matter of seconds using the dotnet CLI templates.  
-For a starter guide see our [documentation](https://docs.fabulous.dev/v2/xamarin.forms/getting-started).
+For a starter guide see [Get Started with Fabulous.XamarinForms](https://fabulous.dev/xamarin.forms/get-started).
 
 ```sh
 dotnet new install Fabulous.XamarinForms.Templates
@@ -59,14 +57,32 @@ dotnet new fabulous-xf-vswin -n MyApp
 
 ## Documentation
 
-Documentation can be found at https://docs.fabulous.dev/v2/xamarin.forms
+The full documentation for Fabulous.XamarinForms can be found at [docs.fabulous.dev/v2/xamarin.forms](https://docs.fabulous.dev/v2/xamarin.forms).
 
-## Sponsor Fabulous
+Other useful links:
+- [The official Fabulous website](https://fabulous.dev)
+- [Get started](https://fabulous.dev/get-started)
+- [API Reference](https://api.fabulous.dev/v2/xamarin.forms)
+- [Contributor Guide](CONTRIBUTING.md)
 
-Donating is a fantastic way to support all the efforts going into making Fabulous the best declarative UI framework for dotnet.  
-We accept donations through the GitHub Sponsors program.
+Additionally, we have the [Fabulous Discord server](https://discord.gg/bpTJMbSSYK) where you can ask any of your Fabulous related questions.
+
+## Supporting Fabulous
+
+The simplest way to show us your support is by giving the project and the [Fabulous project](https://github.com/fabulous-dev/Fabulous) a star.
+
+You can also support us by becoming our sponsor on the GitHub Sponsors program.  
+This is a fantastic way to support all the efforts going into making Fabulous the best declarative UI framework for dotnet.
 
 If you need support see Commercial Support section below.
+
+## Contributing
+
+Have you found a bug or have a suggestion of how to enhance Fabulous? Open an issue and we will take a look at it as soon as possible.
+
+Do you want to contribute with a PR? PRs are always welcome, just make sure to create it from the correct branch (main) and follow the [Contributor Guide](CONTRIBUTING.md).
+
+For bigger changes, or if in doubt, make sure to talk about your contribution to the team. Either via an issue, GitHub discussion, or reach out to the team either using the [Discord server](https://discord.gg/bpTJMbSSYK).
 
 ## Commercial support
 
