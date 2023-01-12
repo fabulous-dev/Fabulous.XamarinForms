@@ -133,7 +133,6 @@ There are a few things to think about when doing a release:
 [fork guide]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects
 [Discord]: https://discord.gg/bpTJMbSSYK
 [.NET 6.0 SDK]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
-[Ionide plugin]: https://ionide.io/Editors/Code/overview.html
 [build workflow]: .github/workflows/build.yml
 [CHANGELOG.md]: CHANGELOG.md
 [JetBrains Rider]: https://www.jetbrains.com/rider/

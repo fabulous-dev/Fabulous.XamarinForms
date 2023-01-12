@@ -61,7 +61,7 @@ The full documentation for Fabulous.XamarinForms can be found at [docs.fabulous.
 
 Other useful links:
 - [The official Fabulous website](https://fabulous.dev)
-- [Get started](https://fabulous.dev/get-started)
+- [Get started](https://fabulous.dev/xamarin.forms/get-started)
 - [API Reference](https://api.fabulous.dev/v2/xamarin.forms)
 - [Contributor Guide](CONTRIBUTING.md)
 
@@ -69,7 +69,7 @@ Additionally, we have the [Fabulous Discord server](https://discord.gg/bpTJMbSSY
 
 ## Supporting Fabulous
 
-The simplest way to show us your support is by giving the project and the [Fabulous project](https://github.com/fabulous-dev/Fabulous) a star.
+The simplest way to show us your support is by giving this project and the [Fabulous project](https://github.com/fabulous-dev/Fabulous) a star.
 
 You can also support us by becoming our sponsor on the GitHub Sponsors program.  
 This is a fantastic way to support all the efforts going into making Fabulous the best declarative UI framework for dotnet.
