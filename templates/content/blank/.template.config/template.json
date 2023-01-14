@@ -67,7 +67,7 @@
       "type": "parameter",
       "dataType": "string",
       "replaces": "FabulousPkgsVersion",
-      "defaultValue": "FABULOUS_PKG_VERSION"
+      "defaultValue": "2.1.1"
     },
     "FSharpCorePkgVersion": {
       "type": "parameter",
