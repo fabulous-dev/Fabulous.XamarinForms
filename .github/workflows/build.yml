@@ -7,7 +7,7 @@ on:
 permissions: write-all
 
 env:
-  VERSION: 2.1.3
+  VERSION: 2.1.4
   CONFIG: Release
   SLN_FILE: Fabulous.XamarinForms.NoSamples.sln
   TEMPLATE_PROJ: templates/Fabulous.XamarinForms.Templates.proj
@@ -35,7 +35,6 @@ jobs:
       run: dotnet test ${SLN_FILE} -p:Version=${NIGHTLY_VERSION} -c ${CONFIG} --no-build
     - name: Pack
       run: |
-        find templates -type f -name template.json | xargs sed -i bak "s/FABULOUS_PKG_VERSION/${NIGHTLY_VERSION}/g"
         dotnet pack ${SLN_FILE} -p:Version=${NIGHTLY_VERSION} -c ${CONFIG} --no-build --output nupkgs
         dotnet pack ${TEMPLATE_PROJ} -p:Version=${NIGHTLY_VERSION} -p:IsNightlyBuild=true -c ${CONFIG} --output nupkgs
     - name: Upload artifacts
