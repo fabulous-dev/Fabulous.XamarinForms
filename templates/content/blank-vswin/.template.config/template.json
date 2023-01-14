@@ -51,11 +51,17 @@
       },
       "replaces": "com.companyname.NewApp.iOS"
     },
-    "FabulousPkgsVersion": {
+    "FabulousPkgVersion": {
       "type": "parameter",
       "dataType": "string",
-      "replaces": "FabulousPkgsVersion",
+      "replaces": "FabulousPkgVersion",
       "defaultValue": "2.1.1"
+    },
+    "FabulousXFPkgVersion": {
+      "type": "parameter",
+      "dataType": "string",
+      "replaces": "FabulousXFPkgVersion",
+      "defaultValue": "PKG_VERSION"
     }
   }
 }

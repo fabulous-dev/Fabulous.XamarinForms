@@ -115,7 +115,7 @@
         <PackageReference Include="Xamarin.CommunityToolkit" Version="XamarinCommunityToolkitSdk" />
         <PackageReference Include="Xamarin.Essentials" Version="XamarinEssentialsSdk" />
         <PackageReference Include="Xamarin.Forms" Version="XamarinFormsSdk" />
-        <PackageReference Include="Fabulous.XamarinForms" Version="FabulousPkgsVersion" />
+        <PackageReference Include="Fabulous.XamarinForms" Version="FabulousXFPkgVersion" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\NewApp\NewApp.fsproj">
