@@ -12,6 +12,7 @@ _No unreleased changes_
 ## [2.1.4] - 2023-01-14
 
 ### Changed
+- Remove generic types from WidgetItems and GroupedWidgetItems (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/3)
 - Updated templates to use Fabulous 2.1.1 (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/7)
 - Make sure Fabulous.XamarinForms use only binary-compatible version of Fabulous (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/6)
 - Exclude jsonbak file from templates package (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/8)
