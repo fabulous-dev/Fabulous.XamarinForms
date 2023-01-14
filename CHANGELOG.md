@@ -34,4 +34,4 @@ _No unreleased changes_
 [2.1.4]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.3...2.1.4
 [2.1.3]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.1...2.1.2
-[2.1.1]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/v2.1.1
+[2.1.1]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.1
