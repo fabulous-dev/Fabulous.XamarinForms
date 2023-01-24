@@ -140,7 +140,7 @@
     -->
     <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
     <PackageReference Include="Xamarin.Forms" VersionOverride="5.0.0.1874" />
-    <PackageReference Include="Fabulous" VersionOverride="[2.1.0, 2.2.0)" />
+    <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes_
+### Changed
+- Update to Fabulous 2.2.0 (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/29)
 
 ## [2.1.4] - 2023-01-14
 
