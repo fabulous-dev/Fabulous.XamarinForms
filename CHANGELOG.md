@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes_
+
+## [2.2.0] - 2023-01-24
+
 ### Changed
 - Update to Fabulous 2.2.0 (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/29)
 
@@ -33,8 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fabulous.XamarinForms has moved from the Fabulous repository to its own repository: [https://github.com/fabulous-dev/Fabulous.XamarinForms](https://github.com/fabulous-dev/Fabulous.XamarinForms)
 
-[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.4...HEAD
-[2.1.4]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.3...2.1.4
-[2.1.3]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.2...2.1.3
-[2.1.2]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.1.1...2.1.2
+[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.2.0
+[2.1.4]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.4
+[2.1.3]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.3
+[2.1.2]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.2
 [2.1.1]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.1
