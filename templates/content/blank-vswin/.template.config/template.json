@@ -55,7 +55,7 @@
       "type": "parameter",
       "dataType": "string",
       "replaces": "FabulousPkgVersion",
-      "defaultValue": "2.1.1"
+      "defaultValue": "2.2.0"
     },
     "FabulousXFPkgVersion": {
       "type": "parameter",
