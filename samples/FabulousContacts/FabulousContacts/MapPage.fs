@@ -106,7 +106,10 @@ module MapPage =
 
         | PinsLoaded pins -> { model with Pins = Some pins }, Cmd.none
 
-        | UserPositionRetrieved location -> { model with UserPosition = Some location }, Cmd.none
+        | UserPositionRetrieved location ->
+            { model with
+                UserPosition = Some location },
+            Cmd.none
 
     let view model =
         let map userPositionOpt pins =
