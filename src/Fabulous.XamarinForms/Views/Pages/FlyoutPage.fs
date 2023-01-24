@@ -29,10 +29,8 @@ module FlyoutPage =
             (target :?> CustomFlyoutPage).CustomIsPresentedChanged)
 
     let Flyout =
-        Attributes.definePropertyWidget
-            "FlyoutPage_Flyout"
-            (fun target -> (target :?> FlyoutPage).Flyout :> obj)
-            (fun target value -> (target :?> FlyoutPage).Flyout <- value)
+        Attributes.definePropertyWidget "FlyoutPage_Flyout" (fun target -> (target :?> FlyoutPage).Flyout :> obj) (fun target value ->
+            (target :?> FlyoutPage).Flyout <- value)
 
     let FlyoutBounds =
         Attributes.defineSimpleScalarWithEquality<Rectangle> "FlyoutPage_FlyoutBounds" (fun _ newValueOpt node ->
@@ -49,10 +47,8 @@ module FlyoutPage =
         Attributes.defineBindableEnum<FlyoutLayoutBehavior> FlyoutPage.FlyoutLayoutBehaviorProperty
 
     let Detail =
-        Attributes.definePropertyWidget
-            "FlyoutPage_Detail"
-            (fun target -> (target :?> FlyoutPage).Detail :> obj)
-            (fun target value -> (target :?> FlyoutPage).Detail <- value)
+        Attributes.definePropertyWidget "FlyoutPage_Detail" (fun target -> (target :?> FlyoutPage).Detail :> obj) (fun target value ->
+            (target :?> FlyoutPage).Detail <- value)
 
     let DetailBounds =
         Attributes.defineSimpleScalarWithEquality<Rectangle> "FlyoutPage_DetailBounds" (fun _ newValueOpt node ->

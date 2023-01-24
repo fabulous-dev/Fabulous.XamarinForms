@@ -153,7 +153,9 @@ module App =
                 let x, y = newModel.GameScore
 
                 match result with
-                | Win p -> { newModel with GameScore = (if p = X then (x + 1, y) else (x, y + 1)) }
+                | Win p ->
+                    { newModel with
+                        GameScore = (if p = X then (x + 1, y) else (x, y + 1)) }
                 | _ -> newModel
 
             // Return the new model.
@@ -166,7 +168,8 @@ module App =
         | VisualBoardSizeChanged args ->
             let size = min args.Width args.Height - 80.
 
-            { model with VisualBoardSize = Some size }
+            { model with
+                VisualBoardSize = Some size }
 
     /// A helper used in the 'view' function to get the name
     /// of the Xaml resource for the image for a player

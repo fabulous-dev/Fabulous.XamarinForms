@@ -115,7 +115,8 @@ module ContactsListPage =
                     .background(accentColor)
                     .cancelButtonColor(accentTextColor)
 
-                (ListView (model.Contacts) (fun contact -> cellView contact.Picture $"{contact.FirstName} {contact.LastName}" contact.Address contact.IsFavorite))
+                (ListView (model.Contacts) (fun contact ->
+                    cellView contact.Picture $"{contact.FirstName} {contact.LastName}" contact.Address contact.IsFavorite))
                     .rowHeight(60)
                     .selectionMode(ListViewSelectionMode.None)
                     .onItemTapped(ContactSelected)

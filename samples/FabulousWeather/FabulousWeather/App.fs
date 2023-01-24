@@ -58,12 +58,16 @@ module App =
         | GoToPreviousCity ->
             let prevIndex = Math.Max(0, model.CurrentCityIndex - 1)
 
-            { model with CurrentCityIndex = prevIndex }, Cmd.none
+            { model with
+                CurrentCityIndex = prevIndex },
+            Cmd.none
 
         | GoToNextCity ->
             let nextIndex = Math.Max(0, model.CurrentCityIndex + 1)
 
-            { model with CurrentCityIndex = nextIndex }, Cmd.none
+            { model with
+                CurrentCityIndex = nextIndex },
+            Cmd.none
 
         | RequestRefresh index ->
             let updatedCities =
