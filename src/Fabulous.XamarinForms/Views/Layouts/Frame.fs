@@ -35,8 +35,8 @@ type FrameModifiers =
     /// <summary>Set the corner radius of the frame</summary>
     /// <param name="value">The corner radius of the frame</param>
     [<Extension>]
-    static member inline cornerRadius(this: WidgetBuilder<'msg, #IFrame>, value: float32) =
-        this.AddScalar(Frame.CornerRadius.WithValue(value))
+    static member inline cornerRadius(this: WidgetBuilder<'msg, #IFrame>, value: float) =
+        this.AddScalar(Frame.CornerRadius.WithValue(float32 value))
 
     // <summary>Set the shadow of the frame</summary>
     // <param name="value">Whether the frame has a shadow</param>
