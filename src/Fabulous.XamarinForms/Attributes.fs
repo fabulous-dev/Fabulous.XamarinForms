@@ -63,15 +63,6 @@ module SmallScalars =
             let expands = (encoded &&& 0x00000000FFFFFFFFUL) = 1UL
 
             LayoutOptions(alignment, expands)
-            
-    // should this be in Fabulous?        
-    module Float32 =
-        let inline encode (v: float32) : uint64 =
-            v |> float |> BitConverter.DoubleToInt64Bits |> uint64
-
-        let inline decode (encoded: uint64) : float32 =
-            encoded |> int64 |> BitConverter.Int64BitsToDouble |> float32
-        
 
 [<Extension>]
 type SmallScalarExtensions() =
@@ -86,11 +77,7 @@ type SmallScalarExtensions() =
     [<Extension>]
     static member inline WithValue(this: SmallScalarAttributeDefinition<AppThemeValues<FabColor>>, value) =
         this.WithValue(value, SmallScalars.ThemedColor.encode)
-        
-    [<Extension>]
-    static member inline WithValue(this: SmallScalarAttributeDefinition<float32>, value) =
-        this.WithValue(value, SmallScalars.Float32.encode)
-        
+
 module Attributes =
     /// Define an attribute for a BindableProperty
     let inline defineBindable<'modelType, 'valueType>
@@ -126,7 +113,7 @@ module Attributes =
     /// Define a float attribute for a BindableProperty and encode it as a small scalar (8 bytes)
     let inline defineBindableFloat (bindableProperty: BindableProperty) =
         defineSmallBindable bindableProperty SmallScalars.Float.decode
-        
+
     let inline defineBindableFloat32 (bindableProperty: BindableProperty) =
         defineSmallBindable bindableProperty SmallScalars.Float32.decode
 

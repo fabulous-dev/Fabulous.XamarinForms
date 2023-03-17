@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes_
+### Fixed
+
+- Add support for float32 properties which fixes corner radius for Frame (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/35)
 
 ## [2.2.0] - 2023-01-24
 
