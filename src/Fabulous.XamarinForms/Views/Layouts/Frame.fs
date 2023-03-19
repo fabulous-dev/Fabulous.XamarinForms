@@ -12,7 +12,7 @@ module Frame =
 
     let BorderColor = Attributes.defineBindableAppThemeColor Frame.BorderColorProperty
 
-    let CornerRadius = Attributes.defineBindableFloat Frame.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableFloat32 Frame.CornerRadiusProperty
 
     let HasShadow = Attributes.defineBindableBool Frame.HasShadowProperty
 
@@ -36,7 +36,7 @@ type FrameModifiers =
     /// <param name="value">The corner radius of the frame</param>
     [<Extension>]
     static member inline cornerRadius(this: WidgetBuilder<'msg, #IFrame>, value: float) =
-        this.AddScalar(Frame.CornerRadius.WithValue(value))
+        this.AddScalar(Frame.CornerRadius.WithValue(float32 value))
 
     // <summary>Set the shadow of the frame</summary>
     // <param name="value">Whether the frame has a shadow</param>

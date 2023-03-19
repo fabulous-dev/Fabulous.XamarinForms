@@ -114,6 +114,10 @@ module Attributes =
     let inline defineBindableFloat (bindableProperty: BindableProperty) =
         defineSmallBindable bindableProperty SmallScalars.Float.decode
 
+    /// Define a float32 attribute for a BindableProperty and encode it as a small scalar (8 bytes)
+    let inline defineBindableFloat32 (bindableProperty: BindableProperty) =
+        defineSmallBindable bindableProperty SmallScalars.Float32.decode
+
     /// Define a boolean attribute for a BindableProperty and encode it as a small scalar (8 bytes)
     let inline defineBindableBool (bindableProperty: BindableProperty) =
         defineSmallBindable bindableProperty SmallScalars.Bool.decode
