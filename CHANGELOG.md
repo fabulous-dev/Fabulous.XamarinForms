@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
+No unreleased changes.
 
+## [2.3.0] - 2023-06-30
+
+### Changed
+- cornerRadius modifier of ImageButton widget now accepts a int value instead of a float value (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/38)
+
+### Fixed
 - Add support for float32 properties which fixes corner radius for Frame (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/35)
 
 ## [2.2.0] - 2023-01-24
@@ -39,7 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fabulous.XamarinForms has moved from the Fabulous repository to its own repository: [https://github.com/fabulous-dev/Fabulous.XamarinForms](https://github.com/fabulous-dev/Fabulous.XamarinForms)
 
-[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.2.0...HEAD
+[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.3.0
 [2.2.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.2.0
 [2.1.4]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.4
 [2.1.3]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.1.3
