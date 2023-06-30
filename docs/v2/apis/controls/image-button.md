@@ -30,18 +30,18 @@ For details on how the control actually works, please refer to the [Xamarin.Form
 
 ## Properties
 
-| Properties | Description |
-|--|--|
-| borderColor(light: FabColor, ?dark: FabColor) | Sets the border color |
-| borderWidth(value: float) | Sets the border width |
-| cornerRadius(value: float) | Sets the corner radius |
-| isLoading(value: bool) | Sets if the image is currently loading |
-| isOpaque(value: bool) | Sets if the image is opaque |
-| isPressed(value: bool) | Sets if the image is currently pressed |
-| padding(value: Thickness) | Sets the padding |
-| padding(value: float) | Sets a uniform padding |
+| Properties                                                    | Description |
+|---------------------------------------------------------------|--|
+| borderColor(light: FabColor, ?dark: FabColor)                 | Sets the border color |
+| borderWidth(value: float)                                     | Sets the border width |
+| cornerRadius(value: int)                                      | Sets the corner radius |
+| isLoading(value: bool)                                        | Sets if the image is currently loading |
+| isOpaque(value: bool)                                         | Sets if the image is opaque |
+| isPressed(value: bool)                                        | Sets if the image is currently pressed |
+| padding(value: Thickness)                                     | Sets the padding |
+| padding(value: float)                                         | Sets a uniform padding |
 | padding(left: float, top: float, right: float, bottom: float) | Sets the padding |
-| reference(value: ViewRef&lt;ImageButton&gt;) | Sets a `ViewRef` instance to retrieve the `Xamarin.Forms.ImageButton` instance associated to this widget |
+| reference(value: ViewRef&lt;ImageButton&gt;)                  | Sets a `ViewRef` instance to retrieve the `Xamarin.Forms.ImageButton` instance associated to this widget |
 
 ## Events
 

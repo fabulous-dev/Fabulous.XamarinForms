@@ -20,7 +20,7 @@ module ImageButton =
 
     let BorderWidth = Attributes.defineBindableFloat ImageButton.BorderWidthProperty
 
-    let CornerRadius = Attributes.defineBindableFloat ImageButton.CornerRadiusProperty
+    let CornerRadius = Attributes.defineBindableInt ImageButton.CornerRadiusProperty
 
     let IsLoading = Attributes.defineBindableBool ImageButton.IsLoadingProperty
 
@@ -103,7 +103,7 @@ type ImageButtonModifiers =
     /// <summary>Set the corner radius of the image button</summary>
     /// <param name="radius">The corner radius of the image button.</param>
     [<Extension>]
-    static member inline cornerRadius(this: WidgetBuilder<'msg, #IImageButton>, value: float) =
+    static member inline cornerRadius(this: WidgetBuilder<'msg, #IImageButton>, value: int) =
         this.AddScalar(ImageButton.CornerRadius.WithValue(value))
 
     [<Extension>]
