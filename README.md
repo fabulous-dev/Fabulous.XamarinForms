@@ -43,7 +43,7 @@ let view model =
 ## Getting Started
 
 You can start your new Fabulous.XamarinForms app in a matter of seconds using the dotnet CLI templates.  
-For a starter guide see [Get Started with Fabulous.XamarinForms](https://fabulous.dev/xamarin.forms/get-started).
+For a starter guide see [Get Started with Fabulous.XamarinForms](https://docs.fabulous.dev/xamarinforms/get-started).
 
 ```sh
 dotnet new install Fabulous.XamarinForms.Templates
@@ -57,12 +57,12 @@ dotnet new fabulous-xf-vswin -n MyApp
 
 ## Documentation
 
-The full documentation for Fabulous.XamarinForms can be found at [docs.fabulous.dev/v2/xamarin.forms](https://docs.fabulous.dev/v2/xamarin.forms).
+The full documentation for Fabulous.XamarinForms can be found at [docs.fabulous.dev/v2/xamarin.forms](https://docs.fabulous.dev/xamarinforms).
 
 Other useful links:
 - [The official Fabulous website](https://fabulous.dev)
-- [Get started](https://fabulous.dev/xamarin.forms/get-started)
-- [API Reference](https://api.fabulous.dev/v2/xamarin.forms)
+- [Get started](https://docs.fabulous.dev/xamarinforms/get-started)
+- [API Reference](https://api.fabulous.dev/xamarinforms)
 - [Contributor Guide](CONTRIBUTING.md)
 
 Additionally, we have the [Fabulous Discord server](https://discord.gg/bpTJMbSSYK) where you can ask any of your Fabulous related questions.
