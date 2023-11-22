@@ -31,7 +31,7 @@ module ToolbarItemBuilders =
     type Fabulous.XamarinForms.View with
 
         static member inline ToolbarItem<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IToolbarItem>(ToolbarItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
+            WidgetBuilder<'msg, IToolbarItem>(ToolbarItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(MsgValue onClicked))
 
 [<Extension>]
 type ToolbarItemModifiers =

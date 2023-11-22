@@ -68,9 +68,9 @@ module CompositeTransformBuilders =
         static member inline CompositeTransform<'msg>(centerX: float, centerY: float, scaleX: float, scaleY: float, skewX: float, skewY: float) =
             WidgetBuilder<'msg, ICompositeTransform>(
                 CompositeTransform.WidgetKey,
-                CompositeTransform.CenterXY.WithValue((centerX, centerY)),
-                CompositeTransform.ScaleXY.WithValue((scaleX, scaleY)),
-                CompositeTransform.SkewXY.WithValue((skewX, skewY))
+                CompositeTransform.CenterXY.WithValue(struct (centerX, centerY)),
+                CompositeTransform.ScaleXY.WithValue(struct (scaleX, scaleY)),
+                CompositeTransform.SkewXY.WithValue(struct (skewX, skewY))
             )
 
 [<Extension>]
@@ -78,7 +78,7 @@ type CompositeTransformModifiers =
 
     [<Extension>]
     static member inline translate(this: WidgetBuilder<'msg, #ICompositeTransform>, x: float, y: float) =
-        this.AddScalar(CompositeTransform.TranslateXY.WithValue((x, y)))
+        this.AddScalar(CompositeTransform.TranslateXY.WithValue(struct (x, y)))
 
     [<Extension>]
     static member inline rotation(this: WidgetBuilder<'msg, #ICompositeTransform>, angle: float) =

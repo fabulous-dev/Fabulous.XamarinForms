@@ -47,12 +47,12 @@ type CellModifiers =
 
     [<Extension>]
     static member inline onAppearing(this: WidgetBuilder<'msg, #ICell>, onAppearing: 'msg) =
-        this.AddScalar(Cell.Appearing.WithValue(onAppearing))
+        this.AddScalar(Cell.Appearing.WithValue(MsgValue onAppearing))
 
     [<Extension>]
     static member inline onDisappearing(this: WidgetBuilder<'msg, #ICell>, onDisappearing: 'msg) =
-        this.AddScalar(Cell.Disappearing.WithValue(onDisappearing))
+        this.AddScalar(Cell.Disappearing.WithValue(MsgValue onDisappearing))
 
     [<Extension>]
     static member inline onTapped(this: WidgetBuilder<'msg, #ICell>, onTapped: 'msg) =
-        this.AddScalar(Cell.Tapped.WithValue(onTapped))
+        this.AddScalar(Cell.Tapped.WithValue(MsgValue onTapped))

@@ -21,7 +21,7 @@ module TapGestureRecognizerBuilders =
     type Fabulous.XamarinForms.View with
 
         static member inline TapGestureRecognizer<'msg>(onTapped: 'msg) =
-            WidgetBuilder<'msg, ITapGestureRecognizer>(TapGestureRecognizer.WidgetKey, TapGestureRecognizer.Tapped.WithValue(onTapped))
+            WidgetBuilder<'msg, ITapGestureRecognizer>(TapGestureRecognizer.WidgetKey, TapGestureRecognizer.Tapped.WithValue(MsgValue onTapped))
 
 [<Extension>]
 type TapGestureRecognizerModifiers =

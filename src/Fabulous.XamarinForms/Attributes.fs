@@ -21,10 +21,12 @@ module AppTheme =
 [<Struct>]
 type ValueEventData<'data, 'eventArgs> =
     { Value: 'data
-      Event: 'eventArgs -> obj }
+      Event: 'eventArgs -> MsgValue }
 
 module ValueEventData =
-    let create (value: 'data) (event: 'eventArgs -> obj) = { Value = value; Event = event }
+    let create (value: 'data) (event: 'eventArgs -> 'msg) =
+        { Value = value
+          Event = event >> box >> MsgValue }
 
 /// Xamarin Forms specific attributes that can be encoded as 8 bytes
 module SmallScalars =
@@ -225,7 +227,7 @@ module Attributes =
                         // Set the new event handler
                         let handler =
                             EventHandler<'args>(fun _ args ->
-                                let r = curr.Event args
+                                let (MsgValue r) = curr.Event args
                                 Dispatcher.dispatch node r)
 
                         node.SetHandler(name, ValueSome handler)

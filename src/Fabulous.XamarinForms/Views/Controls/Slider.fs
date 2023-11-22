@@ -61,7 +61,7 @@ module SliderBuilders =
             WidgetBuilder<'msg, ISlider>(
                 Slider.WidgetKey,
                 Slider.MinimumMaximum.WithValue(struct (min, max)),
-                Slider.ValueWithEvent.WithValue(ValueEventData.create value (fun args -> onValueChanged args.NewValue |> box))
+                Slider.ValueWithEvent.WithValue(ValueEventData.create value (fun (args: ValueChangedEventArgs) -> onValueChanged args.NewValue))
             )
 
 [<Extension>]
@@ -139,11 +139,11 @@ type SliderModifiers =
 
     [<Extension>]
     static member inline onDragCompleted(this: WidgetBuilder<'msg, #ISlider>, onDragCompleted: 'msg) =
-        this.AddScalar(Slider.DragCompleted.WithValue(onDragCompleted))
+        this.AddScalar(Slider.DragCompleted.WithValue(MsgValue onDragCompleted))
 
     [<Extension>]
     static member inline onDragStarted(this: WidgetBuilder<'msg, #ISlider>, onDragStarted: 'msg) =
-        this.AddScalar(Slider.DragStarted.WithValue(onDragStarted))
+        this.AddScalar(Slider.DragStarted.WithValue(MsgValue onDragStarted))
 
     /// <summary>Link a ViewRef to access the direct Slider control instance</summary>
     [<Extension>]

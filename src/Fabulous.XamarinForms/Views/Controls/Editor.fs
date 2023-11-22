@@ -34,7 +34,7 @@ module EditorBuilders =
         static member inline Editor<'msg>(text: string, onTextChanged: string -> 'msg) =
             WidgetBuilder<'msg, IEditor>(
                 Editor.WidgetKey,
-                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun (args: TextChangedEventArgs) -> onTextChanged args.NewTextValue))
             )
 
 [<Extension>]
@@ -69,7 +69,7 @@ type EditorModifiers =
         this.AddScalar(Editor.AutoSize.WithValue(value))
 
     /// <summary>Sets a value that controls whether the editor will allow text prediction.</summary>
-    /// <param name="true will allow text prediction. otherwise false.</param>
+    /// <param name="value">true will allow text prediction. otherwise false.</param>
     [<Extension>]
     static member inline isPredictionEnabled(this: WidgetBuilder<'msg, #IEditor>, value: bool) =
         this.AddScalar(Editor.IsTextPredictionEnabled.WithValue(value))
@@ -78,7 +78,7 @@ type EditorModifiers =
     /// <param name="onCompleted">Msg to dispatch when editing has completed.</param>
     [<Extension>]
     static member inline onCompleted(this: WidgetBuilder<'msg, #IEditor>, onCompleted: 'msg) =
-        this.AddScalar(Editor.Completed.WithValue(onCompleted))
+        this.AddScalar(Editor.Completed.WithValue(MsgValue onCompleted))
 
     /// <summary>Link a ViewRef to access the direct Editor control instance</summary>
     [<Extension>]

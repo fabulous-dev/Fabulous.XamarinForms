@@ -24,7 +24,7 @@ module SwitchBuilders =
         static member inline Switch<'msg>(isToggled: bool, onToggled: bool -> 'msg) =
             WidgetBuilder<'msg, ISwitch>(
                 Switch.WidgetKey,
-                Switch.IsToggledWithEvent.WithValue(ValueEventData.create isToggled (fun args -> onToggled args.Value |> box))
+                Switch.IsToggledWithEvent.WithValue(ValueEventData.create isToggled (fun (args: ToggledEventArgs) -> onToggled args.Value))
             )
 
 [<Extension>]

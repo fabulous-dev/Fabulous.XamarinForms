@@ -43,5 +43,5 @@ type LayoutModifiers =
         this.AddScalar(Layout.IsClippedToBounds.WithValue(value))
 
     [<Extension>]
-    static member inline onLayoutChanged(this: WidgetBuilder<'msg, #ILayout>, value: 'msg) =
-        this.AddScalar(Layout.LayoutChanged.WithValue(value))
+    static member inline onLayoutChanged(this: WidgetBuilder<'msg, #ILayout>, onLayoutChanged: 'msg) =
+        this.AddScalar(Layout.LayoutChanged.WithValue(MsgValue onLayoutChanged))

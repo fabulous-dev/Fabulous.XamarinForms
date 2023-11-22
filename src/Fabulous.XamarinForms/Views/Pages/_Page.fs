@@ -155,19 +155,19 @@ type PageModifiers =
     /// <param name="onAppearing">Msg to dispatch when then page is appearing.</param>
     [<Extension>]
     static member inline onAppearing(this: WidgetBuilder<'msg, #IPage>, onAppearing: 'msg) =
-        this.AddScalar(Page.Appearing.WithValue(onAppearing))
+        this.AddScalar(Page.Appearing.WithValue(MsgValue onAppearing))
 
     /// <summary>Event that is fired when the page is disappearing.</summary>
     /// <param name="onDisappearing">Msg to dispatch when then page is disappearing.</param>
     [<Extension>]
     static member inline onDisappearing(this: WidgetBuilder<'msg, #IPage>, onDisappearing: 'msg) =
-        this.AddScalar(Page.Disappearing.WithValue(onDisappearing))
+        this.AddScalar(Page.Disappearing.WithValue(MsgValue onDisappearing))
 
     /// <summary>Event that is fired when the page layout has Changed.</summary>
     /// <param name="onLayoutChanged">Msg to dispatch when then page layout has Changed.</param>
     [<Extension>]
     static member inline onLayoutChanged(this: WidgetBuilder<'msg, #IPage>, onLayoutChanged: 'msg) =
-        this.AddScalar(Page.LayoutChanged.WithValue(onLayoutChanged))
+        this.AddScalar(Page.LayoutChanged.WithValue(MsgValue onLayoutChanged))
 
     [<Extension>]
     static member inline toolbarItems<'msg, 'marker when 'marker :> IPage>(this: WidgetBuilder<'msg, 'marker>) =

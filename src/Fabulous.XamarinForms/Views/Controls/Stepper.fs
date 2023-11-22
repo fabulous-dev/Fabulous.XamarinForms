@@ -44,7 +44,7 @@ module StepperBuilders =
             WidgetBuilder<'msg, IStepper>(
                 Stepper.WidgetKey,
                 Stepper.MinimumMaximum.WithValue(struct (min, max)),
-                Stepper.ValueWithEvent.WithValue(ValueEventData.create value (fun args -> onValueChanged args.NewValue |> box))
+                Stepper.ValueWithEvent.WithValue(ValueEventData.create value (fun (args: ValueChangedEventArgs) -> onValueChanged args.NewValue))
             )
 
 [<Extension>]

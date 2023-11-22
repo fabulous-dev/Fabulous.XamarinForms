@@ -20,4 +20,4 @@ type MultiPageOfPageModifiers =
     /// <param name="onCurrentPageChanged">The msg to invoke when the CurrentPage property changes.</param>
     [<Extension>]
     static member inline onCurrentPageChanged(this: WidgetBuilder<'msg, #IMultiPageOfPage>, onCurrentPageChanged: 'msg) =
-        this.AddScalar(MultiPageOfPage.CurrentPageChanged.WithValue(onCurrentPageChanged))
+        this.AddScalar(MultiPageOfPage.CurrentPageChanged.WithValue(MsgValue onCurrentPageChanged))

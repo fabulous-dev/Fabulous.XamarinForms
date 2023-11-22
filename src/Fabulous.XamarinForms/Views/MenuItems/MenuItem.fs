@@ -32,7 +32,7 @@ module MenuItemBuilders =
     type Fabulous.XamarinForms.View with
 
         static member inline MenuItem<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IMenuItem>(MenuItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
+            WidgetBuilder<'msg, IMenuItem>(MenuItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(MsgValue onClicked))
 
 [<Extension>]
 type MenuItemModifiers =

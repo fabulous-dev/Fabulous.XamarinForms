@@ -184,7 +184,7 @@ type ListViewModifiers =
 
     [<Extension>]
     static member inline onRefreshing(this: WidgetBuilder<'msg, #IListView>, onRefreshing: 'msg) =
-        this.AddScalar(ListView.Refreshing.WithValue(onRefreshing))
+        this.AddScalar(ListView.Refreshing.WithValue(MsgValue onRefreshing))
 
     [<Extension>]
     static member inline onScrolled(this: WidgetBuilder<'msg, #IListView>, onScrolled: ScrolledEventArgs -> 'msg) =

@@ -51,7 +51,7 @@ module ImageButtonBuilders =
             WidgetBuilder<'msg, IImageButton>(
                 ImageButton.WidgetKey,
                 ImageButton.Aspect.WithValue(aspect),
-                ImageButton.Clicked.WithValue(onClicked),
+                ImageButton.Clicked.WithValue(MsgValue onClicked),
                 ImageButton.Source.WithValue(AppTheme.create light dark)
             )
 
@@ -95,13 +95,13 @@ type ImageButtonModifiers =
         this.AddScalar(ImageButton.BorderColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the width of the image button border</summary>
-    /// <param name="width">The width of the image button border.</param>
+    /// <param name="value">The width of the image button border.</param>
     [<Extension>]
     static member inline borderWidth(this: WidgetBuilder<'msg, #IImageButton>, value: float) =
         this.AddScalar(ImageButton.BorderWidth.WithValue(value))
 
     /// <summary>Set the corner radius of the image button</summary>
-    /// <param name="radius">The corner radius of the image button.</param>
+    /// <param name="value">The corner radius of the image button.</param>
     [<Extension>]
     static member inline cornerRadius(this: WidgetBuilder<'msg, #IImageButton>, value: int) =
         this.AddScalar(ImageButton.CornerRadius.WithValue(value))
@@ -134,13 +134,13 @@ type ImageButtonModifiers =
     /// <param name="onPressed">Msg to dispatch when image button is pressed</param>
     [<Extension>]
     static member inline onPressed(this: WidgetBuilder<'msg, #IImageButton>, onPressed: 'msg) =
-        this.AddScalar(ImageButton.Pressed.WithValue(onPressed))
+        this.AddScalar(ImageButton.Pressed.WithValue(MsgValue onPressed))
 
     /// <summary>Event that is fired when image button is released.</summary>
     /// <param name="onReleased">Msg to dispatch when image button is released.</param>
     [<Extension>]
     static member inline onReleased(this: WidgetBuilder<'msg, #IImageButton>, onReleased: 'msg) =
-        this.AddScalar(ImageButton.Released.WithValue(onReleased))
+        this.AddScalar(ImageButton.Released.WithValue(MsgValue onReleased))
 
     /// <summary>Link a ViewRef to access the direct ImageButton control instance</summary>
     [<Extension>]

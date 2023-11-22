@@ -57,7 +57,7 @@ module DatePickerBuilders =
         static member inline DatePicker<'msg>(date: DateTime, onDateSelected: DateTime -> 'msg) =
             WidgetBuilder<'msg, IDatePicker>(
                 DatePicker.WidgetKey,
-                DatePicker.DateWithEvent.WithValue(ValueEventData.create date (fun args -> onDateSelected args.NewDate |> box))
+                DatePicker.DateWithEvent.WithValue(ValueEventData.create date (fun (args: DateChangedEventArgs) -> onDateSelected args.NewDate))
             )
 
 [<Extension>]

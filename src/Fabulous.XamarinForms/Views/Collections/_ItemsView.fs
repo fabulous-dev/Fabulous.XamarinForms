@@ -52,12 +52,12 @@ type ItemsViewModifiers =
 
     /// <summary>The threshold of items not yet visible in the list at which the RemainingItemsThresholdReached event will be fired.</summary>
     /// <param name="value">The threshold of items not yet visible in the list</param>
-    /// <param="onThresholdReached">Event executed when the RemainingItemsThreshold is reached</param>
+    /// <param name="onThresholdReached">Event executed when the RemainingItemsThreshold is reached</param>
     [<Extension>]
     static member inline remainingItemsThreshold(this: WidgetBuilder<'msg, #IItemsView>, value: int, onThresholdReached: 'msg) =
         this
             .AddScalar(ItemsView.RemainingItemsThreshold.WithValue(value))
-            .AddScalar(ItemsView.RemainingItemsThresholdReached.WithValue(onThresholdReached))
+            .AddScalar(ItemsView.RemainingItemsThresholdReached.WithValue(MsgValue onThresholdReached))
 
     /// <summary>Sets the visibility of the horizontal scroll bar.</summary>
     /// <param name="value">true if the horizontal scroll is enabled; otherwise, false.</param>

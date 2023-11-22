@@ -37,8 +37,8 @@ module SearchBarBuilders =
         static member inline SearchBar<'msg>(text: string, onTextChanged: string -> 'msg, onSearchButtonPressed: 'msg) =
             WidgetBuilder<'msg, ISearchBar>(
                 SearchBar.WidgetKey,
-                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box)),
-                SearchBar.SearchButtonPressed.WithValue(onSearchButtonPressed)
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun (args: TextChangedEventArgs) -> onTextChanged args.NewTextValue)),
+                SearchBar.SearchButtonPressed.WithValue(MsgValue onSearchButtonPressed)
             )
 
 [<Extension>]
@@ -74,13 +74,13 @@ type SearchBarModifiers =
         res
 
     /// <summary>Set the horizontal text alignment</summary>
-    /// param name="alignment">The horizontal text alignment</summary>
+    /// <param name="value">The horizontal text alignment</param>
     [<Extension>]
     static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #ISearchBar>, value: TextAlignment) =
         this.AddScalar(SearchBar.HorizontalTextAlignment.WithValue(value))
 
     /// <summary>Set the vertical text alignment</summary>
-    /// param name="alignment">The vertical text alignment</summary>
+    /// <param name="value">The vertical text alignment</param>
     [<Extension>]
     static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #ISearchBar>, value: TextAlignment) =
         this.AddScalar(SearchBar.VerticalTextAlignment.WithValue(value))

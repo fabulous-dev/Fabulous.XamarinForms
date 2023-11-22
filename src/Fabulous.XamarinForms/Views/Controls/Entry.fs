@@ -60,7 +60,7 @@ module EntryBuilders =
         static member inline Entry<'msg>(text: string, onTextChanged: string -> 'msg) =
             WidgetBuilder<'msg, IEntry>(
                 Entry.WidgetKey,
-                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
+                InputView.TextWithEvent.WithValue(ValueEventData.create text (fun (args: TextChangedEventArgs) -> onTextChanged args.NewTextValue))
             )
 
 [<Extension>]
@@ -122,7 +122,7 @@ type EntryModifiers =
 
     [<Extension>]
     static member inline onCompleted(this: WidgetBuilder<'msg, #IEntry>, onCompleted: 'msg) =
-        this.AddScalar(Entry.Completed.WithValue(onCompleted))
+        this.AddScalar(Entry.Completed.WithValue(MsgValue onCompleted))
 
     /// <summary>Link a ViewRef to access the direct Entry control instance</summary>
     [<Extension>]

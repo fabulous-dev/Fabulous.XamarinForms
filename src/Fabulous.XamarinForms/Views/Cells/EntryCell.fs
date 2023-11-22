@@ -41,7 +41,7 @@ module EntryCellBuilders =
             WidgetBuilder<'msg, IEntryCell>(
                 EntryCell.WidgetKey,
                 EntryCell.Label.WithValue(label),
-                EntryCell.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
+                EntryCell.TextWithEvent.WithValue(ValueEventData.create text (fun (args: TextChangedEventArgs) -> onTextChanged args.NewTextValue))
             )
 
 [<Extension>]
@@ -54,32 +54,32 @@ type EntryCellModifiers =
         this.AddScalar(EntryCell.LabelColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the horizontal text alignment</summary>
-    /// param name="alignment">The horizontal text alignment</summary>
+    /// <param name="alignment">The horizontal text alignment</param>
     [<Extension>]
     static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #IEntryCell>, alignment: TextAlignment) =
         this.AddScalar(EntryCell.HorizontalTextAlignment.WithValue(alignment))
 
     /// <summary>Set the vertical text alignment</summary>
-    /// param name="alignment">The vertical text alignment</summary>
+    /// <param name="alignment">The vertical text alignment</param>
     [<Extension>]
     static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #IEntryCell>, alignment: TextAlignment) =
         this.AddScalar(EntryCell.VerticalTextAlignment.WithValue(alignment))
 
     /// <summary>Set the keyboard</summary>
-    /// param name="keyboard">The keyboard type</summary>
+    /// <param name="keyboard">The keyboard type</param>
     [<Extension>]
     static member inline keyboard(this: WidgetBuilder<'msg, #IEntryCell>, keyboard: Keyboard) =
         this.AddScalar(EntryCell.Keyboard.WithValue(keyboard))
 
     /// <summary>Set the placeholder text</summary>
-    /// param name="placeholder">The placeholder</summary>
+    /// <param name="placeholder">The placeholder</param>
     [<Extension>]
     static member inline placeholder(this: WidgetBuilder<'msg, #IEntryCell>, placeholder: string) =
         this.AddScalar(EntryCell.Placeholder.WithValue(placeholder))
 
     [<Extension>]
     static member inline onCompleted(this: WidgetBuilder<'msg, #IEntryCell>, onCompleted: 'msg) =
-        this.AddScalar(EntryCell.OnCompleted.WithValue(onCompleted))
+        this.AddScalar(EntryCell.OnCompleted.WithValue(MsgValue onCompleted))
 
     /// <summary>Link a ViewRef to access the direct EntryCell control instance</summary>
     [<Extension>]

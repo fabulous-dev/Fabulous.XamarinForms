@@ -100,17 +100,17 @@ type ApplicationModifiers =
     /// Dispatch a message when the application starts
     [<Extension>]
     static member inline onStart(this: WidgetBuilder<'msg, #IApplication>, onStart: 'msg) =
-        this.AddScalar(Application.Start.WithValue(onStart))
+        this.AddScalar(Application.Start.WithValue(MsgValue onStart))
 
     /// Dispatch a message when the application is paused by the OS
     [<Extension>]
     static member inline onSleep(this: WidgetBuilder<'msg, #IApplication>, onSleep: 'msg) =
-        this.AddScalar(Application.Sleep.WithValue(onSleep))
+        this.AddScalar(Application.Sleep.WithValue(MsgValue onSleep))
 
     /// Dispatch a message when the application is resumed by the OS
     [<Extension>]
     static member inline onResume(this: WidgetBuilder<'msg, #IApplication>, onResume: 'msg) =
-        this.AddScalar(Application.Resume.WithValue(onResume))
+        this.AddScalar(Application.Resume.WithValue(MsgValue onResume))
 
     /// Link a ViewRef to access the direct Application instance
     [<Extension>]

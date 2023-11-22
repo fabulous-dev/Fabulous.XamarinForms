@@ -33,7 +33,7 @@ module ScaleTransformBuilders =
         static member inline ScaleTransform<'msg>(scaleX: float, scaleY: float, centerX: float, centerY: float) =
             WidgetBuilder<'msg, IScaleTransform>(
                 ScaleTransform.WidgetKey,
-                ScaleTransform.ScaleXY.WithValue((scaleX, scaleY)),
+                ScaleTransform.ScaleXY.WithValue(struct (scaleX, scaleY)),
                 ScaleTransform.CenterX.WithValue(centerX),
                 ScaleTransform.CenterY.WithValue(centerY)
             )

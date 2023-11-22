@@ -108,7 +108,7 @@ type WebViewModifiers() =
 
     [<Extension>]
     static member inline onReloadRequested(this: WidgetBuilder<'msg, #IWebView>, onReloadRequested: 'msg) =
-        this.AddScalar(WebView.ReloadRequested.WithValue(onReloadRequested))
+        this.AddScalar(WebView.ReloadRequested.WithValue(MsgValue onReloadRequested))
 
     /// <summary>Link a ViewRef to access the direct WebView control instance</summary>
     [<Extension>]

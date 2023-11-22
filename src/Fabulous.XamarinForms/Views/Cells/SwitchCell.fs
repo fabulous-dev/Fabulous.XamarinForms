@@ -24,7 +24,7 @@ module SwitchCellBuilders =
         static member inline SwitchCell<'msg>(text: string, value: bool, onChanged: bool -> 'msg) =
             WidgetBuilder<'msg, ISwitchCell>(
                 SwitchCell.WidgetKey,
-                SwitchCell.OnWithEvent.WithValue(ValueEventData.create value (fun args -> onChanged args.Value |> box)),
+                SwitchCell.OnWithEvent.WithValue(ValueEventData.create value (fun (args: ToggledEventArgs) -> onChanged args.Value)),
                 SwitchCell.Text.WithValue(text)
             )
 

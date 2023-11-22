@@ -59,7 +59,7 @@ module ButtonBuilders =
     type Fabulous.XamarinForms.View with
 
         static member inline Button<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IButton>(Button.WidgetKey, Button.Text.WithValue(text), Button.Clicked.WithValue(onClicked))
+            WidgetBuilder<'msg, IButton>(Button.WidgetKey, Button.Text.WithValue(text), Button.Clicked.WithValue(MsgValue onClicked))
 
 [<Extension>]
 type ButtonModifiers =
@@ -165,11 +165,11 @@ type ButtonModifiers =
 
     [<Extension>]
     static member inline onPressed(this: WidgetBuilder<'msg, #IButton>, onPressed: 'msg) =
-        this.AddScalar(Button.Pressed.WithValue(onPressed))
+        this.AddScalar(Button.Pressed.WithValue(MsgValue onPressed))
 
     [<Extension>]
     static member inline onReleased(this: WidgetBuilder<'msg, #IButton>, onReleased: 'msg) =
-        this.AddScalar(Button.Released.WithValue(onReleased))
+        this.AddScalar(Button.Released.WithValue(MsgValue onReleased))
 
     /// <summary>Link a ViewRef to access the direct Button control instance</summary>
     [<Extension>]
