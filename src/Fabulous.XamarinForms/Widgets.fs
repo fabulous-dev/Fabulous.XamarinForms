@@ -15,7 +15,7 @@ type View =
     end
 
 module Widgets =
-    let registerWithAdditionalSetup<'T when 'T :> Xamarin.Forms.BindableObject and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
+    let registerWithFactoryAndAdditionalSetup<'T when 'T :> Xamarin.Forms.BindableObject> (factory: Widget -> 'T) (additionalSetup: 'T -> IViewNode -> unit) =
         let key = WidgetDefinitionStore.getNextKey()
 
         let definition =
@@ -26,7 +26,7 @@ module Widgets =
                 fun (widget, treeContext, parentNode) ->
                     treeContext.Logger.Debug("Creating view for {0}", typeof<'T>.Name)
 
-                    let view = new 'T()
+                    let view = factory widget
                     let weakReference = WeakReference(view)
 
                     let parentNode =
@@ -65,9 +65,15 @@ module Widgets =
 
         WidgetDefinitionStore.set key definition
         key
+        
+    let rec registerWithFactory<'T when 'T :> Xamarin.Forms.BindableObject> (factory: Widget -> 'T) =
+        registerWithFactoryAndAdditionalSetup<'T> factory (fun _ _ -> ())
+    
+    let registerWithAdditionalSetup<'T when 'T :> Xamarin.Forms.BindableObject and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
+        registerWithFactoryAndAdditionalSetup<'T> (fun _ -> new 'T()) additionalSetup
 
     let register<'T when 'T :> Xamarin.Forms.BindableObject and 'T: (new: unit -> 'T)> () =
-        registerWithAdditionalSetup<'T>(fun _ _ -> ())
+        registerWithFactory<'T> (fun _ -> new 'T())
 
 module WidgetHelpers =
     let inline compileSeq (items: seq<WidgetBuilder<'msg, 'marker>>) =
