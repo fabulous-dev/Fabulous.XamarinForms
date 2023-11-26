@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 No unreleased changes.
 
+## [2.4.1] - 2023-11-26
+
+### Added
+- Added additional Any widgets to support Memo widget as a root
+- Added itemsLayout modifier to CollectionView widget
+
 ## [2.4.0] - 2023-11-22
 
 ### Changed
@@ -50,7 +56,8 @@ No unreleased changes.
 ### Changed
 - Fabulous.XamarinForms has moved from the Fabulous repository to its own repository: [https://github.com/fabulous-dev/Fabulous.XamarinForms](https://github.com/fabulous-dev/Fabulous.XamarinForms)
 
-[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.4.0...HEAD
+[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.4.1...HEAD
+[2.4.1]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.4.1
 [2.4.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.4.0
 [2.3.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.3.0
 [2.2.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.2.0

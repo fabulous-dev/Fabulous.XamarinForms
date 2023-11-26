@@ -2,12 +2,21 @@
 
 open System
 open Fabulous
+open Fabulous.Memo
 open Fabulous.ScalarAttributeDefinitions
 open Fabulous.WidgetCollectionAttributeDefinitions
 open Xamarin.Forms
 open System.Diagnostics
 
 module ViewHelpers =
+    let private tryGetSmallScalarValue (widget: Widget) (def: SmallScalarAttributeDefinition<'data>) =
+        match widget.ScalarAttributes with
+        | ValueNone -> ValueNone
+        | ValueSome scalarAttrs ->
+            match Array.tryFind (fun (attr: ScalarAttribute) -> attr.Key = def.Key) scalarAttrs with
+            | None -> ValueNone
+            | Some attr -> ValueSome(unbox<'data> attr.Value)
+
     let private tryGetScalarValue (widget: Widget) (def: SimpleScalarAttributeDefinition<'data>) =
         match widget.ScalarAttributes with
         | ValueNone -> ValueNone
@@ -34,6 +43,8 @@ module ViewHelpers =
             if def.TargetType <> null then
                 if def.TargetType.IsAssignableFrom(typeof<NavigationPage>) then
                     canReuseNavigationPage prev curr
+                elif def.TargetType.IsAssignableFrom(typeof<ItemsLayout>) then
+                    canReuseItemsLayout prev curr
                 else
                     true
             else
@@ -72,6 +83,13 @@ module ViewHelpers =
                 true
 
         | _ -> true
+
+    /// Given the Orientation of the ItemsLayout is passed to the constructor, it can't be changed later.
+    /// If the orientation changes, a new ItemsLayout has to be created.
+    and private canReuseItemsLayout (prev: Widget) (curr: Widget) =
+        let prevOpt = tryGetSmallScalarValue prev ItemsLayout.Orientation
+        let currOpt = tryGetSmallScalarValue curr ItemsLayout.Orientation
+        prevOpt = currOpt
 
     let defaultLogger () =
         let log (level, message) =
@@ -115,6 +133,14 @@ module Program =
     let statefulWithCmd (init: 'arg -> 'model * Cmd<'msg>) (update: 'msg -> 'model -> 'model * Cmd<'msg>) (view: 'model -> WidgetBuilder<'msg, #IApplication>) =
         define init update view
 
+    /// Create a program using an MVU loop. Add support for Cmd
+    let statefulWithCmdMemo
+        (init: 'arg -> 'model * Cmd<'msg>)
+        (update: 'msg -> 'model -> 'model * Cmd<'msg>)
+        (view: 'model -> WidgetBuilder<'msg, Memoized<#IApplication>>)
+        =
+        define init update view
+
     /// Create a program using an MVU loop. Add support for CmdMsg
     let statefulWithCmdMsg
         (init: 'arg -> 'model * 'cmdMsg list)
@@ -135,6 +161,16 @@ module Program =
 
     /// Start the program
     let startApplication (program: Program<unit, 'model, 'msg, 'marker>) : Application = startApplicationWithArgs () program
+
+    /// Start the program
+    let startApplicationWithArgsMemo (arg: 'arg) (program: Program<'arg, 'model, 'msg, Memoized<#IApplication>>) : Application =
+        let runner = Runners.create program
+        runner.Start(arg)
+        let adapter = ViewAdapters.create ViewNode.get runner
+        adapter.CreateView() |> unbox
+
+    /// Start the program
+    let startApplicationMemo (program: Program<unit, 'model, 'msg, Memoized<'marker>>) : Application = startApplicationWithArgsMemo () program
 
     /// Subscribe to external source of events.
     /// The subscription is called once - with the initial model, but can dispatch new messages at any time.

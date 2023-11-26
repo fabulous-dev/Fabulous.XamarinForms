@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>Fabulous.XamarinForms</PackageId>
@@ -95,6 +95,13 @@
     <Compile Include="Views\Collections\_ItemsView.fs" />
     <Compile Include="Views\Collections\_ItemsViewOfCell.fs" />
     <Compile Include="Views\Collections\ListView.fs" />
+    <Compile Include="Views\Collections\_ItemsLayout.fs" />
+    <Compile Include="Views\Collections\GridItemsLayout.fs" />
+    <Compile Include="Views\Collections\LinearItemsLayout.fs" />
+    <Compile Include="Views\Collections\_StructuredItemsView.fs" />
+    <Compile Include="Views\Collections\_SelectableItemsView.fs" />
+    <Compile Include="Views\Collections\_GroupableItemsView.fs" />
+    <Compile Include="Views\Collections\_ReorderableItemsView.fs" />
     <Compile Include="Views\Collections\CollectionView.fs" />
     <Compile Include="Views\Collections\CarouselView.fs" />
     <Compile Include="Views\Shapes\Segments\_PathSegment.fs" />
