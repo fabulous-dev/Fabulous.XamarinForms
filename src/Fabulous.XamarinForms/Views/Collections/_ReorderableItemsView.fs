@@ -1,4 +1,4 @@
 namespace Fabulous.XamarinForms
 
-type IReordableItemsView = inherit IGroupableItemsView
-
+type IReordableItemsView =
+    inherit IGroupableItemsView

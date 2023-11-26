@@ -16,7 +16,7 @@ module ViewHelpers =
             match Array.tryFind (fun (attr: ScalarAttribute) -> attr.Key = def.Key) scalarAttrs with
             | None -> ValueNone
             | Some attr -> ValueSome(unbox<'data> attr.Value)
-            
+
     let private tryGetScalarValue (widget: Widget) (def: SimpleScalarAttributeDefinition<'data>) =
         match widget.ScalarAttributes with
         | ValueNone -> ValueNone
@@ -83,7 +83,7 @@ module ViewHelpers =
                 true
 
         | _ -> true
-        
+
     /// Given the Orientation of the ItemsLayout is passed to the constructor, it can't be changed later.
     /// If the orientation changes, a new ItemsLayout has to be created.
     and private canReuseItemsLayout (prev: Widget) (curr: Widget) =
@@ -134,7 +134,11 @@ module Program =
         define init update view
 
     /// Create a program using an MVU loop. Add support for Cmd
-    let statefulWithCmdMemo (init: 'arg -> 'model * Cmd<'msg>) (update: 'msg -> 'model -> 'model * Cmd<'msg>) (view: 'model -> WidgetBuilder<'msg, Memoized<#IApplication>>) =
+    let statefulWithCmdMemo
+        (init: 'arg -> 'model * Cmd<'msg>)
+        (update: 'msg -> 'model -> 'model * Cmd<'msg>)
+        (view: 'model -> WidgetBuilder<'msg, Memoized<#IApplication>>)
+        =
         define init update view
 
     /// Create a program using an MVU loop. Add support for CmdMsg

@@ -4,17 +4,20 @@ open System.Runtime.CompilerServices
 open Fabulous
 open Xamarin.Forms
 
-type IStructuredItemsView = inherit IItemsView
+type IStructuredItemsView =
+    inherit IItemsView
 
 module StructuredItemsView =
     let Footer = Attributes.defineBindableWidget StructuredItemsView.FooterProperty
-    
+
     let Header = Attributes.defineBindableWidget StructuredItemsView.HeaderProperty
-    
-    let ItemsSizingStrategy = Attributes.defineBindableEnum<ItemSizingStrategy> StructuredItemsView.ItemSizingStrategyProperty
-    
-    let ItemsLayout = Attributes.defineBindableWidget StructuredItemsView.ItemsLayoutProperty
-    
+
+    let ItemsSizingStrategy =
+        Attributes.defineBindableEnum<ItemSizingStrategy> StructuredItemsView.ItemSizingStrategyProperty
+
+    let ItemsLayout =
+        Attributes.defineBindableWidget StructuredItemsView.ItemsLayoutProperty
+
 [<Extension>]
 type StructuredItemsViewModifiers =
     [<Extension>]
@@ -24,7 +27,7 @@ type StructuredItemsViewModifiers =
             content: WidgetBuilder<'msg, 'contentMarker>
         ) =
         this.AddWidget(StructuredItemsView.Footer.WithValue(content.Compile()))
-        
+
     [<Extension>]
     static member inline header<'msg, 'marker, 'contentMarker when 'marker :> IStructuredItemsView and 'contentMarker :> IView>
         (
@@ -34,9 +37,13 @@ type StructuredItemsViewModifiers =
         this.AddWidget(StructuredItemsView.Header.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline itemsSizingStrategy<'msg, 'marker when 'marker :> IStructuredItemsView>(this: WidgetBuilder<'msg, 'marker>, value: ItemSizingStrategy) =
+    static member inline itemsSizingStrategy<'msg, 'marker when 'marker :> IStructuredItemsView>
+        (
+            this: WidgetBuilder<'msg, 'marker>,
+            value: ItemSizingStrategy
+        ) =
         this.AddScalar(StructuredItemsView.ItemsSizingStrategy.WithValue(value))
-        
+
     [<Extension>]
     static member inline itemsLayout<'msg, 'marker, 'contentMarker when 'marker :> IStructuredItemsView and 'contentMarker :> Fabulous.XamarinForms.IItemsLayout>
         (

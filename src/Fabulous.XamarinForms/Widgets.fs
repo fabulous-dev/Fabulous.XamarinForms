@@ -65,15 +65,15 @@ module Widgets =
 
         WidgetDefinitionStore.set key definition
         key
-        
+
     let rec registerWithFactory<'T when 'T :> Xamarin.Forms.BindableObject> (factory: Widget -> 'T) =
         registerWithFactoryAndAdditionalSetup<'T> factory (fun _ _ -> ())
-    
+
     let registerWithAdditionalSetup<'T when 'T :> Xamarin.Forms.BindableObject and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
         registerWithFactoryAndAdditionalSetup<'T> (fun _ -> new 'T()) additionalSetup
 
     let register<'T when 'T :> Xamarin.Forms.BindableObject and 'T: (new: unit -> 'T)> () =
-        registerWithFactory<'T> (fun _ -> new 'T())
+        registerWithFactory<'T>(fun _ -> new 'T())
 
 module WidgetHelpers =
     let inline compileSeq (items: seq<WidgetBuilder<'msg, 'marker>>) =

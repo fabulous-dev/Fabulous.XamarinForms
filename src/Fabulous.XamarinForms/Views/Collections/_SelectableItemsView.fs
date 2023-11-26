@@ -4,7 +4,8 @@ open System.Runtime.CompilerServices
 open Xamarin.Forms
 open Fabulous
 
-type ISelectableItemsView = inherit IStructuredItemsView
+type ISelectableItemsView =
+    inherit IStructuredItemsView
 
 module SelectableItemsView =
     let SelectionMode =
@@ -12,7 +13,7 @@ module SelectableItemsView =
 
     let SelectionChanged =
         Attributes.defineEvent<SelectionChangedEventArgs> "CollectionView_SelectionChanged" (fun target -> (target :?> CollectionView).SelectionChanged)
-        
+
 [<Extension>]
 type SelectableItemsView =
     [<Extension>]
