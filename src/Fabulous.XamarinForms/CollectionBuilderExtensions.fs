@@ -86,6 +86,13 @@ type CollectionBuilderExtensions =
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
 
+    [<Extension>]
+    static member inline Yield<'msg, 'marker, 'itemType when 'marker :> ICell and 'itemType :> IMenuItem>
+        (
+            _: AttributeCollectionBuilder<'msg, 'marker, IMenuItem>,
+            x: WidgetBuilder<'msg, 'itemType>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
 
     [<Extension>]
     static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPage>
