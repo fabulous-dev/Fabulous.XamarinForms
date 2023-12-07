@@ -30,6 +30,9 @@ module Cell =
     let Tapped =
         Attributes.defineEventNoArg "Cell_Tapped" (fun target -> (target :?> Cell).Tapped)
 
+    let ContextActions =
+        Attributes.defineListWidgetCollection "Cell_ContextActions" (fun target -> (target :?> Cell).ContextActions)
+
 [<Extension>]
 type CellModifiers =
 
@@ -56,3 +59,7 @@ type CellModifiers =
     [<Extension>]
     static member inline onTapped(this: WidgetBuilder<'msg, #ICell>, onTapped: 'msg) =
         this.AddScalar(Cell.Tapped.WithValue(MsgValue onTapped))
+
+    [<Extension>]
+    static member inline contextActions<'msg, 'marker when 'marker :> ICell>(this: WidgetBuilder<'msg, 'marker>) =
+        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IMenuItem> Cell.ContextActions this
