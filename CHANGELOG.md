@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 No unreleased changes.
 
+## [2.4.2] - 2023-12-07
+
+### Added
+- Added missing Cell.ContextActions and MultiPage.CurrentPage modifiers (https://github.com/fabulous-dev/Fabulous.XamarinForms/pull/40)
+
 ## [2.4.1] - 2023-11-26
 
 ### Added
@@ -56,7 +61,8 @@ No unreleased changes.
 ### Changed
 - Fabulous.XamarinForms has moved from the Fabulous repository to its own repository: [https://github.com/fabulous-dev/Fabulous.XamarinForms](https://github.com/fabulous-dev/Fabulous.XamarinForms)
 
-[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.4.1...HEAD
+[unreleased]: https://github.com/fabulous-dev/Fabulous.XamarinForms/compare/2.4.2...HEAD
+[2.4.2]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.4.2
 [2.4.1]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.4.1
 [2.4.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.4.0
 [2.3.0]: https://github.com/fabulous-dev/Fabulous.XamarinForms/releases/tag/2.3.0
